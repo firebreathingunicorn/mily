@@ -1,0 +1,16 @@
+# Swift
+.build/
+.swiftpm/
+*.xcodeproj
+Package.resolved
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Generated outputs
+eval/out/
+product/picker_out/
+app/assets/burst/
+mascot/preview_assets/

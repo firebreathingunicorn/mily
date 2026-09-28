@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Marbled Cat — Mascot Asset Preview</title>
+<style>
+  :root { color-scheme: dark; }
+  body { margin: 0; font: 14px/1.5 -apple-system, "SF Pro Text", Helvetica, sans-serif;
+         background: #17181c; color: #e8e6e1; }
+  header { padding: 28px 36px 8px; }
+  h1 { font-size: 20px; margin: 0 0 4px; }
+  header p { margin: 0; color: #9a968e; }
+  section { padding: 20px 36px 8px; }
+  h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .12em;
+       color: #8f8b83; margin: 0 0 12px; }
+  .grid { display: flex; flex-wrap: wrap; gap: 20px; }
+  .card { width: 300px; border-radius: 12px; overflow: hidden;
+          border: 1px solid #2c2d33; }
+  .card .stage { height: 300px; display: flex; align-items: center;
+                 justify-content: center; }
+  .stage.light { background: #f2f3ee; }
+  .stage.dark  { background: #1d1e24; }
+  .stage.checker { background:
+       repeating-conic-gradient(#3a3b41 0% 25%, #2e2f35 0% 50%) 0 0 / 32px 32px; }
+  .card img { width: 240px; image-rendering: pixelated; }
+  .card .peek-img { width: 300px; }
+  .card figcaption { padding: 8px 12px; font-size: 12px; color: #9a968e;
+                     border-top: 1px solid #2c2d33; background: #202127; }
+  code { color: #c9c5bc; }
+</style>
+</head>
+<body>
+<header>
+  <h1>🐈‍⬛ Marbled Cat — mascot pack</h1>
+  <p>Transparent APNG previews (8-bit alpha). Full-size 576px and 160px sets;
+     each action also ships as GIF and alpha WebM in <code>assets/</code>.</p>
+</header>
+
+<section>
+  <h2>Mixer — switch to any animation, smooth crossfade</h2>
+  <div style="display:flex; gap:20px; align-items:stretch; flex-wrap:wrap;">
+    <div id="stage" class="stage checker"
+         style="width:320px;height:320px;position:relative;overflow:hidden;border-radius:12px;">
+      <img id="cur" src="assets/idle/idle.png"
+           style="width:280px;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);image-rendering:pixelated;">
+    </div>
+    <div id="btns" style="display:flex;flex-wrap:wrap;gap:8px;align-content:flex-start;max-width:520px;"></div>
+  </div>
+  <p style="color:#9a968e;font-size:12px;">One-shots (running, chasing, peeking)
+  replay on loop after their first pass.</p>
+</section>
+
+<script>
+const ACTIONS = ["idle", "waving", "floating", "sleeping", "glitching",
+                 "zapped", "phone", "suit", "reading", "eating", "baking",
+                 "noodles", "gaming", "grooming", "boing", "tv", "piano",
+                 "campfire", "treadmill", "flexing", "stretching",
+                 "graduating", "basketball", "volleyball", "baseball",
+                 "dance", "snowman", "rain", "firefighter", "discovery", "plane", "weightlifting",
+                 "running", "chasing", "peeking"];
+const btns = document.getElementById("btns");
+let current = "idle";
+for (const name of ACTIONS) {
+  const b = document.createElement("button");
+  b.textContent = name;
+  b.dataset.name = name;
+  b.onclick = () => switchTo(name);
+  Object.assign(b.style, {
+    font: "13px -apple-system, Helvetica, sans-serif",
+    padding: "7px 14px", borderRadius: "8px", cursor: "pointer",
+    border: "1px solid #2c2d33", background: "#202127", color: "#c9c5bc",
+  });
+  btns.appendChild(b);
+}
+function markActive() {
+  for (const b of btns.children)
+    b.style.background = b.dataset.name === current ? "#3d5a80" : "#202127";
+}
+function switchTo(name) {
+  if (name === current) return;
+  current = name;
+  markActive();
+  const stage = document.getElementById("stage");
+  const old = document.getElementById("cur");
+  const img = new Image();
+  img.id = "cur";
+  img.src = `assets/${name}/${name}.png`;
+  img.alt = name;
+  Object.assign(img.style, {
+    width: "280px", position: "absolute", left: "50%", top: "50%",
+    transform: "translate(-50%,-50%)", imageRendering: "pixelated",
+    opacity: "0", transition: "opacity .35s ease",
+  });
+  stage.appendChild(img);
+  requestAnimationFrame(() => requestAnimationFrame(() => { img.style.opacity = "1"; }));
+  setTimeout(() => old && old.remove(), 420);
+}
+markActive();
+</script>
+
+<section>
+  <h2>Looping actions</h2>
+  <div class="grid">
+    <figure class="card"><div class="stage checker"><img src="assets/idle/idle.png"></div>
+      <figcaption><code>idle.png</code> — breathing, blink, ear twitch</figcaption></figure>
+    <figure class="card"><div class="stage checker"><img src="assets/waving/waving.png"></div>
+      <figcaption><code>waving.png</code> — stepped paw wave</figcaption></figure>
+    <figure class="card"><div class="stage checker"><img src="assets/floating/floating.png"></div>
+      <figcaption><code>floating.png</code> — weightless bob</figcaption></figure>
+    <figure class="card"><div class="stage checker"><img src="assets/sleeping/sleeping.png"></div>
+      <figcaption><code>sleeping.png</code> — curled coil + Zzz</figcaption></figure>
+    <figure class="card"><div class="stage checker"><img src="assets/glitching/glitching.png"></div>
+      <figcaption><code>glitching.png</code> — retro slice glitch</figcaption></figure>
+    <figure class="card"><div class="stage checker"><img src="assets/zapped/zapped.png"></div>
+      <figcaption><code>zapped.png</code> — touches the bolt, gets zapped, goes back for more</figcaption></figure>
+    <figure class="card"><div class="stage checker"><img src="assets/reading/reading.png"></div>
+      <figcaption><code>reading.png</code> — red hardcover, page turns, glances up</figcaption></figure>
+    <figure class="card"><div class="stage checker"><img src="assets/eating/eating.png"></div>
+      <figcaption><code>eating.png</code> — holds the chicken sandwich up and chomps it, bite by bite</figcaption></figure>
+    <figure class="card"><div class="stage checker"><img src="assets/grooming/grooming.png"></div>
+      <figcaption><code>grooming.png</code> — paw lick, tongue darts, cheek wipe</figcaption></figure>
+    <figure class="card"><div class="stage checker"><img src="assets/boing/boing.png"></div>
+      <figcaption><code>boing.png</code> — excited bounce: crouch, spring, hang, shake it off</figcaption></figure>
+    <figure class="card"><div class="stage checker"><img src="assets/tv/tv.png"></div>
+      <figcaption><code>tv.png</code> — channel zapping: cat show, aquarium, rocket launch (jump-scare), news</figcaption></figure>
+    <figure class="card"><div class="stage checker"><img src="assets/treadmill/treadmill.png"></div>
+      <figcaption><code>treadmill.png</code> — gym session: jog, sprint, bonk, pant on the dead belt</figcaption></figure>
+    <figure class="card"><div class="stage checker"><img src="assets/flexing/flexing.png"></div>
+      <figcaption><code>flexing.png</code> — double-biceps with bumps, sparkle max-effort</figcaption></figure>
+    <figure class="card"><div class="stage checker"><img src="assets/stretching/stretching.png"></div>
+      <figcaption><code>stretching.png</code> — yoga flow: deep arch, tail up, sway into the dip</figcaption></figure>
+    <figure class="card"><div class="stage checker"><img src="assets/phone/phone.png"></div>
+      <figcaption><code>phone.png</code> — ring ring… hello? … chats, gets shocked, waves bye</figcaption></figure>
+    <figure class="card"><div class="stage checker"><img src="assets/graduating/graduating.png"></div>
+      <figcaption><code>graduating.png</code> — cap and gown, tassel swing, cap toss through the confetti</figcaption></figure>
+    <figure class="card"><div class="stage checker"><img src="assets/basketball/basketball.png"></div>
+      <figcaption><code>basketball.png</code> — dribble, dribble, shoot — swish through the net</figcaption></figure>
+    <figure class="card"><div class="stage checker"><img src="assets/snowman/snowman.png"></div>
+      <figcaption><code>snowman.png</code> — rolls, stacks, carrot nose, celebrates under the snow</figcaption></figure>
+    <figure class="card"><div class="stage checker"><img src="assets/rain/rain.png"></div>
+      <figcaption><code>rain.png</code> — red umbrella, tail drip, a drop boops the nose, shake it off</figcaption></figure>
+    <figure class="card"><div class="stage checker"><img src="assets/piano/piano.png"></div>
+      <figcaption><code>piano.png</code> — paws on the keys, notes floating up, big crescendo</figcaption></figure>
+    <figure class="card"><div class="stage checker"><img src="assets/baking/baking.png"></div>
+      <figcaption><code>baking.png</code> — toque on: crack, stir, sneak a lick, POOF — cake!</figcaption></figure>
+    <figure class="card"><div class="stage checker"><img src="assets/firefighter/firefighter.png"></div>
+      <figcaption><code>firefighter.png</code> — hoses the blaze down to smoke… then it relights?!</figcaption></figure>
+    <figure class="card"><div class="stage checker"><img src="assets/discovery/discovery.png"></div>
+      <figcaption><code>discovery.png</code> — naps under the tree, apple bonks, ELECTRICITY discovered</figcaption></figure>
+    <figure class="card"><div class="stage checker"><img src="assets/plane/plane.png"></div>
+      <figcaption><code>plane.png</code> — weekend aviator in a tiny red plane, scarf in the wind</figcaption></figure>
+    <figure class="card"><div class="stage checker"><img src="assets/noodles/noodles.png"></div>
+      <figcaption><code>noodles.png</code> — slurps the ramen shorter and shorter, pure happiness</figcaption></figure>
+    <figure class="card"><div class="stage checker"><img src="assets/gaming/gaming.png"></div>
+      <figcaption><code>gaming.png</code> — mashes the controller, clutch shock, WIN with confetti</figcaption></figure>
+    <figure class="card"><div class="stage checker"><img src="assets/campfire/campfire.png"></div>
+      <figcaption><code>campfire.png</code> — toasts a marshmallow under the stars, charred, eats it</figcaption></figure>
+    <figure class="card"><div class="stage checker"><img src="assets/dance/dance.png"></div>
+      <figcaption><code>dance.png</code> — disco ball, light beams, big side-to-side moves</figcaption></figure>
+    <figure class="card"><div class="stage checker"><img src="assets/weightlifting/weightlifting.png"></div>
+      <figcaption><code>weightlifting.png</code> — grip, clean, press overhead, hold the tremble, DROP</figcaption></figure>
+    <figure class="card"><div class="stage checker"><img src="assets/suit/suit.png"></div>
+      <figcaption><code>suit.png</code> — adjusts the tie, shades on, strut, finger guns</figcaption></figure>
+    <figure class="card"><div class="stage checker"><img src="assets/baseball/baseball.png"></div>
+      <figcaption><code>baseball.png</code> — pitch, swing, CRACK — watches it fly</figcaption></figure>
+    <figure class="card"><div class="stage checker"><img src="assets/volleyball/volleyball.png"></div>
+      <figcaption><code>volleyball.png</code> — bump, set, spike jump</figcaption></figure>
+  </div>
+</section>
+
+<section>
+  <h2>Chase &amp; corner peek (one-shots)</h2>
+  <div class="grid">
+    <figure class="card"><div class="stage checker"><img class="peek-img" src="assets/chasing/chasing.png"></div>
+      <figcaption><code>chasing.png</code> — toy mouse darts by, the cat blasts after it</figcaption></figure>
+    <figure class="card"><div class="stage light"><img class="peek-img" src="assets/peeking/peeking.png"></div>
+      <figcaption><code>peeking.png</code> on light — asset's left edge = video frame edge</figcaption></figure>
+    <figure class="card"><div class="stage dark"><img class="peek-img" src="assets/peeking/peeking.png"></div>
+      <figcaption><code>peeking.png</code> on dark — keep it 10–15% of frame width</figcaption></figure>
+    <figure class="card"><div class="stage checker"><img src="assets/running/running.png"></div>
+      <figcaption><code>running.png</code> — zoomies across, then the tired walk of shame: panting, tongue out</figcaption></figure>
+  </div>
+</section>
+
+<section>
+  <h2>Both directions (mirrored <code>_r</code> twins)</h2>
+  <div class="grid">
+    <figure class="card"><div class="stage checker"><img src="assets/running_r/running_r.png"></div>
+      <figcaption><code>running_r.png</code> — dash, right to left</figcaption></figure>
+    <figure class="card"><div class="stage checker"><img src="assets/chasing_r/chasing_r.png"></div>
+      <figcaption><code>chasing_r.png</code> — mouse runs right to left, cat follows</figcaption></figure>
+    <figure class="card"><div class="stage dark"><img class="peek-img" src="assets/peeking_r/peeking_r.png"></div>
+      <figcaption><code>peeking_r.png</code> — peeks from the right edge (asset's right edge = frame edge)</figcaption></figure>
+  </div>
+</section>
+
+<section>
+  <h2>Format guide</h2>
+  <p><code>.png</code> APNG — web pages, Notion, infographics (use this one).
+     <code>.webm</code> — Premiere / DaVinci / CapCut compositing (real alpha).
+     <code>.gif</code> — only when a tool accepts nothing else (jaggy 1-bit edges).</p>
+</section>
+</body>
+</html>
