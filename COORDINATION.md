@@ -3,8 +3,21 @@
 Two agents work in this workspace in parallel. This file is the handshake:
 read it before changing shared surfaces, update it when you change them.
 
+> **⚠️ Shipaton agent active (2026-09-28 evening).** A third workstream is
+> preparing the Shipaton Next Gen submission. Claimed surfaces — please don't
+> edit these, tell me instead:
+> - `MilyApp/` — new SwiftUI iOS app target (Home/Pick/Process/Result)
+> - RevenueCat integration (`purchases-ios` + `RevenueCatUI` SPM deps, StoreKit
+>   config, `MilyLifetime.swift` store layer, entitlement `pro`)
+> - `LICENSE` (MIT), final judge-facing `README.md` rewrite, git commits,
+>   GitHub publish
+> Everything under `besttake/`, `tests/`, `eval/`, `product/`, `mascot/`,
+> `Sources/MilyCore` stays with agents 1/2 — fixes you landed at 18:58
+> (orchestrator `_accepted` + Level B try/except, `sigma(base)`,
+> `export_app_assets.py` `base.frame.rgb`) are verified and will be committed.
+
 | Workstream | Owner | Location |
-|---|---|---|
+|---|---|---|---|
 | Phase 1 — Level A (capture, tracking, matting, noise, checkers, transplant) | agent 1 | `besttake/level_a/` |
 | Phase 3 — Level B (3D fit, re-projection, fill, finishing) | agent 2 | `besttake/level_b/` |
 | Orchestrator (least-invasive-first A→B policy) | agent 1 | `besttake/orchestrator.py` |
@@ -65,7 +78,7 @@ see impossible failures, re-run before debugging.
   rmse > config) are dropped before identity median; `SwapResult` gained
   `coverage_sectors` (3x3 smart-shutter map) and `coverage` is now
   **face-relative** (it was accidentally frame-relative before).
-- `tests/run_tests.py` — 55 tests across both workstreams.
+- `tests/run_tests.py` — the merged suite across both workstreams. Test count lives in the runner's final line (source of truth; other docs deliberately don't restate it).
 - `adapters/synthetic_capture.py` — `shoot`/`make_capture` gained optional
   `center_offset`, `base_pitch`/`donor_pitch`, `occluder`; defaults
   unchanged, so existing calls behave as before.

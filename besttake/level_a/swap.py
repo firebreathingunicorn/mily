@@ -97,7 +97,7 @@ class LevelASwap:
             )
 
         alpha = self.matting.alpha(donor.frame, donor.obs)
-        sigma_base = self.noise.sigma(base.frame) if self.noise is not None else None
+        sigma_base = self.noise.sigma(base) if self.noise is not None else None
         draft = direct_transplant(
             base, base_obs, donor.frame, donor.obs, alpha,
             noise_sigma_base=sigma_base, rng=self.rng,

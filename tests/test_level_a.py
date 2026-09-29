@@ -224,3 +224,32 @@ def test_identity_limit_adapts_to_pose_delta():
 
 # Silence unused-import lint: rel_dist re-exported alias used by some callers.
 _ = rel_dist
+
+
+def test_injected_noise_estimator_receives_frame():
+    """A Phase 1 NoiseEstimator plugged into LevelASwap must receive the
+    base Frame itself. (Regression: the call site passed base.frame — a
+    Frame has no .frame, so injected providers crashed Level A.)"""
+    from besttake.common.types import Frame
+
+    seen = []
+
+    class _RecordingNoise:
+        def sigma(self, frame):
+            assert isinstance(frame, Frame), (
+                f"sigma() received {type(frame).__name__}, expected Frame")
+            seen.append(frame)
+            return 0.008
+
+    cex_b = np.zeros(6); cex_b[2] = 0.8
+    cex_d = np.zeros(6); cex_d[1] = 0.6
+    m, cap = _model(seed=11)
+    capture = cap.make_capture(CID, base_yaw=8.0, donor_yaws=[8.0],
+                               base_c_ex=cex_b, donor_c_ex=cex_d)
+    swap = LevelASwap(noise=_RecordingNoise())
+    res = swap.run(capture.base.frame,
+                   FaceObservation("p0", capture.base.obs_landmarks),
+                   [ADonor(frame=d.frame, obs=FaceObservation("p0", d.obs_landmarks))
+                    for d in capture.donors])
+    assert res is not None and res.method == "A"
+    assert len(seen) == 1 and seen[0] is capture.base.frame

@@ -1,28 +1,28 @@
 import Foundation
 import MilyCore
 
-// besttake CLI
+// mily CLI
 //
-//   besttake demo-burst --out <dir> [--frames N] [--seed N]
+//   mily demo-burst --out <dir> [--frames N] [--seed N]
 //       Write a synthetic two-person burst (no camera needed) for trying the
 //       pipeline end to end.
 //
-//   besttake process <burst-dir> --out <jpg> [--report <json>] [--long-edge N]
+//   mily process <burst-dir> --out <jpg> [--report <json>] [--long-edge N]
 //       Run Level A on a directory of burst images; write the composite and a
 //       per-person JSON report (base/donor frame, level, checks).
 //
-//   besttake eval <root> [--out <csv>]
+//   mily eval <root> [--out <csv>]
 //       Run `process` over every subdirectory (one burst each) and emit a CSV
 //       for blind-test preparation and slice metrics.
 
 func usage() -> Never {
     print("""
     usage:
-      besttake demo-burst --out <dir> [--frames N] [--seed N]
-      besttake process <burst-dir> --out <jpg> [--report <json>] [--long-edge N]
+      mily demo-burst --out <dir> [--frames N] [--seed N]
+      mily process <burst-dir> --out <jpg> [--report <json>] [--long-edge N]
                           [--analyzer auto|vision|sidecar] [--compare]
-      besttake eval <root> [--out <csv>] [--long-edge N]
-      besttake bench [--frames N]
+      mily eval <root> [--out <csv>] [--long-edge N]
+      mily bench [--frames N]
 
     process analyzes a burst with Vision (real photos) or, when the directory
     contains a demo-burst sidecar.json, with the recorded ground truth.
@@ -158,7 +158,7 @@ case "eval":
     var rows = ["burst,person,baseFrame,donorFrame,swapped,level,checksPassed,baseScore,donorScore,identityDistance,fallback"]
     let fm = FileManager.default
     let bursts = (try? fm.contentsOfDirectory(at: rootURL, includingPropertiesForKeys: nil))?
-        .filter { (try? fm.contentsOfDirectory(at: $0, includingPropertiesForKeys: nil).filter { $0.pathExtension.lowercased().hasSuffix(("jpg" as NSString).pathExtension.lowercased()) || true })?.isEmpty == false }
+        .filter { (try? fm.contentsOfDirectory(at: $0, includingPropertiesForKeys: nil))?.isEmpty == false }
         ?? []
     let burstDirs = bursts.filter { dir in
         (try? fm.contentsOfDirectory(at: dir, includingPropertiesForKeys: nil))?

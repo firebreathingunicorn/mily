@@ -9,6 +9,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
+import os
+
 import numpy as np
 
 from ..common.geometry import rodrigues
@@ -54,6 +56,12 @@ class SyntheticCapture:
     def __init__(self, model: SyntheticHeadModel | None = None,
                  size: int = 320, seed: int = 0):
         self.model = model or SyntheticHeadModel()
+        # Fast test mode clamps render size: the pipeline stages are O(n^2)
+        # in the frame edge, so this alone cuts the suite from minutes to
+        # seconds. Set by `tests/run_tests.py --fast`.
+        cap = os.environ.get("BESTTAKE_MAX_RENDER")
+        if cap:
+            size = min(size, int(cap))
         self.size = size
         self.f = 380.0
         self.intrinsics = Intrinsics(fx=self.f, fy=self.f,

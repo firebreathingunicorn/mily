@@ -43,6 +43,16 @@ class Outcome:
     history: list = field(default_factory=list)
 
 
+def _accepted(res: SwapResult | None) -> bool:
+    """Strict acceptance: a real synthesized result whose artifact AND
+    identity checks both passed. "rejected" / "none" results (unchanged
+    base, failed verification) are never accepted."""
+    if res is None or res.method in ("rejected", "none"):
+        return False
+    return bool(res.checks.get("artifact", False)) and \
+        bool(res.checks.get("identity", False))
+
+
 class BestTakeOrchestrator:
     """swap(base, base_obs, donors) -> Outcome with the best safe result."""
 
@@ -67,7 +77,7 @@ class BestTakeOrchestrator:
                 <= self.config.level_a_yaw_split]
         if near:
             res_a = self.level_a.run(base, base_obs, a_donors, base_score=base_score)
-            if res_a is not None and res_a.checks.get("artifact", False):
+            if _accepted(res_a):
                 history.append("A:accepted")
                 return Outcome(res_a, "A", history=history)
             history.append("A:" + ("rejected" if res_a is not None else "no-viable-donor"))
@@ -78,8 +88,15 @@ class BestTakeOrchestrator:
         if self.level_b is not None:
             from besttake.level_b.pipeline import DonorInput
             b_donors = [DonorInput(d.frame, d.obs) for d in donors]
-            res_b = self.level_b.run(base, base_obs, b_donors)
-            if res_b is not None and res_b.checks.get("artifact", False):
+            try:
+                res_b = self.level_b.run(base, base_obs, b_donors)
+            except (ValueError, np.linalg.LinAlgError) as exc:
+                # e.g. no donor frame produced a usable fit — degrade to
+                # "leave the person unchanged" instead of crashing the app.
+                history.append(f"B:failed({exc})")
+                return Outcome(None, "none",
+                               "Level B could not fit this burst", history)
+            if _accepted(res_b):
                 history.append("B:accepted")
                 return Outcome(res_b, "B", history=history)
             history.append("B:" + ("rejected" if res_b is not None else "failed"))

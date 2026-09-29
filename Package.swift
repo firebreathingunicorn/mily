@@ -21,7 +21,9 @@ let package = Package(
         .testTarget(
             name: "MilyCoreTests",
             dependencies: ["MilyCore"],
-            path: "Tests/MilyCoreTests"
+            // lowercase to match the real folder: this repo must also build
+            // on case-sensitive volumes (Linux CI), where Tests/ != tests/
+            path: "tests/MilyCoreTests"
         ),
     ]
 )

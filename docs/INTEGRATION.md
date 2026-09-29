@@ -6,8 +6,10 @@ app. Layout: Swift package `Mily` (library `MilyCore`, CLI `mily`), Python
 research package stays `besttake/` for import compatibility — it is the
 history of this workspace, not the product name.
 
-Last updated: end of Phase 1 integration pass. Merged suite status:
-**`python3 tests/run_tests.py` → 50/50**, **`swift test` → 17/17**.
+Last updated: end of Phase 1 integration pass. Test status is owned by
+the runner itself — the final line of `python3 tests/run_tests.py` (and
+`swift test`) is the single source of truth; this doc intentionally does
+not restate counts.
 
 ## For the Phase 3 agent: read this before diagnosing the shared runner
 

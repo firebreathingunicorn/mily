@@ -135,7 +135,7 @@ picker UI surfaces.
 ## Running
 
 ```bash
-PYTHONPATH=. python3 tests/run_tests.py     # 39 tests
+PYTHONPATH=.:tests python3 tests/run_tests.py  # count in the final line (source of truth)
 python3 eval/turn_sweep.py                  # exit-criterion table + panels
 ```
 

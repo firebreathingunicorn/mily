@@ -51,7 +51,7 @@ def main() -> None:
         level = "rejected" if res.method == "rejected" else res.method
         Image.fromarray((np.clip(d.frame.rgb, 0, 1) * 255).astype(np.uint8)).save(
             OUT / f"frame{i}_original.jpg", quality=92)
-        img = base.rgb if res.method == "rejected" else res.image
+        img = base.frame.rgb if res.method == "rejected" else res.image
         Image.fromarray((np.clip(img, 0, 1) * 255).astype(np.uint8)).save(
             OUT / f"frame{i}_result.jpg", quality=92)
         frames.append({"index": i, "level": level,

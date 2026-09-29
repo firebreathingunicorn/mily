@@ -80,3 +80,62 @@ def test_large_yaw_escalates_to_level_b():
     assert out.level == "B" and out.result is not None
     assert out.result.method.startswith("B")
     assert "A:skipped(pose)" in out.history and "B:accepted" in out.history
+
+
+def test_b_rejected_falls_through_to_none():
+    """Level B returning the unchanged base (method == "rejected", e.g. the
+    identity gate failed) must NOT be reported as B:accepted — the
+    orchestrator falls through to "leave the person unchanged"."""
+    m, capture = _capture(25.0, [5.0])
+
+    class _AlwaysFailIdentity:
+        def check(self, *a, **k):
+            return False
+
+    from besttake.level_b.pipeline import LevelBConfig, LevelBSwap
+    level_b = LevelBSwap(m, LevelBConfig(mode="pinhole"),
+                         identity_checker=_AlwaysFailIdentity())
+    orch = BestTakeOrchestrator(level_b=level_b)
+    out = orch.swap(capture.base.frame,
+                    FaceObservation("p0", capture.base.obs_landmarks),
+                    _donors(capture))
+    assert out.level == "none" and out.result is None
+    assert "B:rejected" in out.history
+    assert "B:accepted" not in out.history
+
+
+def test_b_unusable_fit_does_not_crash():
+    """NaN landmarks mean Level B cannot fit anything: LevelBSwap.run raises
+    ValueError. The orchestrator must catch it and degrade to "leave the
+    person unchanged" instead of crashing."""
+    m, capture = _capture(25.0, [5.0])
+    from besttake.level_b.pipeline import LevelBConfig, LevelBSwap
+    level_b = LevelBSwap(m, LevelBConfig(mode="pinhole"))
+    orch = BestTakeOrchestrator(level_b=level_b)
+
+    base_obs = FaceObservation("p0", capture.base.obs_landmarks.copy() * np.nan)
+    donors = []
+    for d in capture.donors:
+        lm = d.obs_landmarks.copy()
+        lm[:, 0] = np.nan
+        donors.append(BDonor(frame=d.frame,
+                             obs=FaceObservation("p0", lm)))
+    out = orch.swap(capture.base.frame, base_obs, donors)
+    assert out.level == "none" and out.result is None
+    assert any(h.startswith("B:failed(") for h in out.history)
+
+
+def test_level_a_rejected_is_never_accepted():
+    """A Level A result that carries method="none" (identity gate failed)
+    must not pass the orchestrator's acceptance gate even if a broken
+    checker stuffed artifact=True into its checks."""
+    from besttake.common.types import SwapResult
+    from besttake.orchestrator import _accepted
+    res = SwapResult(
+        image=np.zeros((4, 4, 3), np.float32),
+        weight=np.zeros((4, 4), np.float32),
+        source_map=np.full((4, 4), -1, np.int32),
+        face_region=np.zeros((4, 4), bool),
+        method="none", checks={"artifact": True, "identity": False},
+    )
+    assert not _accepted(res)

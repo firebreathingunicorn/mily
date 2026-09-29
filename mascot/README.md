@@ -1,9 +1,9 @@
 # Marbled Cat — Animated Pixel Mascot
 
-A hand-built animated pixel mascot for BestTake: a golden marbled tabby with
+A hand-built animated pixel mascot for Mily: a golden marbled tabby with
 black swirl blotches, black square eyes, whiskers, and a black-ringed tail.
 The marketing angle writes itself — the marbled cat is famously fast and
-impossible to photograph, and BestTake exists to catch exactly that shot.
+impossible to photograph, and Mily exists to catch exactly that shot.
 
 Built locally (no external AI service): the sprite is drawn frame-by-frame in
 Python, animated at a stepped ~6fps cadence (sport bursts ~12fps), and shipped through the same
@@ -18,7 +18,7 @@ on light, dark, and checkerboard backgrounds.
 
 ## The asset pack (`assets/`)
 
-Six actions, five outputs each:
+Thirty-five actions, five outputs each:
 
 | Action | Loop | What it does |
 | --- | --- | --- |

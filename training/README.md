@@ -7,7 +7,7 @@ exist yet, so these are schemas and wiring contracts, not training code.
 ## 1. Expression preference model (replaces `HeuristicExpressionScorer`)
 
 - Interface (Swift): `ExpressionScorer.score(frame:person:) -> Float`
-  (`Sources/BestTakeCore/Selection/Scoring.swift`);
+  (`Sources/MilyCore/Selection/Scoring.swift`);
   Python: `level_a/scoring.score_frame`.
 - Input: face crop + landmark scalars; output: scalar quality.
 - Data: pairwise human preferences — "which moment of this person is better?"
