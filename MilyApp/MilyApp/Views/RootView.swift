@@ -70,6 +70,11 @@ struct RootView: View {
                 let args = ProcessInfo.processInfo.arguments
                 if args.contains("-autoDemo") { startDemo() }
                 if args.contains("-autoPaywall") { showTip = true }
+                // Debug/testing: run a video file directly (skips the picker).
+                if let i = args.firstIndex(of: "-videoPath"), i + 1 < args.count {
+                    showProcessing = true
+                    session.run(videoURL: URL(fileURLWithPath: args[i + 1]))
+                }
             }
         }
         .environmentObject(session)

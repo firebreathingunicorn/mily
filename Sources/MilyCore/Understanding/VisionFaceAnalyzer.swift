@@ -1,5 +1,6 @@
 import Foundation
 import Vision
+import CoreML
 import CoreVideo
 
 /// Person matting via Vision's person segmentation: soft alpha covering hair
@@ -9,6 +10,7 @@ public enum PersonMatting {
 
     public static func segment(cgImage: CGImage, targetWidth: Int, targetHeight: Int) throws -> Mask {
         let request = VNGeneratePersonSegmentationRequest()
+        request.preferCPUOnSimulator()
         request.qualityLevel = .accurate
         let handler = VNImageRequestHandler(cgImage: cgImage, options: [:])
         try handler.perform([request])
@@ -155,11 +157,20 @@ public final class VisionFaceAnalyzer {
         let cg = ImageIO.toCGImage(frame.image)
         let detections = try detectFaces(cg: cg)
         let segCG = ImageIO.resized(cg, maxLongEdge: segmentationLongEdge)
-        let alpha = try PersonMatting.segment(
-            cgImage: segCG,
-            targetWidth: frame.image.width,
-            targetHeight: frame.image.height
-        )
+        // Person segmentation needs the Neural Engine/GPU; the iOS Simulator
+        // (and some older devices) can't create its inference context. Fall
+        // back to an all-person alpha — each person's mask is then just the
+        // soft face-influence ellipse, which is what Level A pastes anyway.
+        let alpha: Mask
+        do {
+            alpha = try PersonMatting.segment(
+                cgImage: segCG,
+                targetWidth: frame.image.width,
+                targetHeight: frame.image.height
+            )
+        } catch {
+            alpha = Mask(width: frame.image.width, height: frame.image.height, fill: 1)
+        }
 
         var geometries: [FaceGeometry] = []
         for obs in detections {
@@ -174,7 +185,8 @@ public final class VisionFaceAnalyzer {
     // MARK: - Detection
 
     private func detectFaces(cg: CGImage) throws -> [VNFaceObservation] {
-        let detect = VNDetectFaceRectanglesRequest()
+        let detect = VNDetectFaceLandmarksRequest() // detects faces AND landmarks; the rectangles request leaves `landmarks` nil
+        detect.preferCPUOnSimulator()
         let handler = VNImageRequestHandler(cgImage: cg, options: [:])
         try handler.perform([detect])
         return detect.results ?? []
@@ -323,5 +335,23 @@ public final class VisionFaceAnalyzer {
             return b.id
         }
         return "person\(reference.count)"
+    }
+}
+
+extension VNRequest {
+    /// The iOS Simulator can't create Vision's Neural Engine/GPU inference
+    /// context ("Could not create inference context"); pin every compute
+    /// stage to the CPU there. Real devices keep Apple's default devices.
+    func preferCPUOnSimulator() {
+        #if targetEnvironment(simulator)
+        if #available(iOS 17.0, macOS 14.0, *) {
+            guard let stages = try? supportedComputeStageDevices else { return }
+            for (stage, devices) in stages {
+                if let cpu = devices.first(where: { if case .cpu = $0 { return true } else { return false } }) {
+                    setComputeDevice(cpu, for: stage)
+                }
+            }
+        }
+        #endif
     }
 }
