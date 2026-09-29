@@ -14,3 +14,8 @@ eval/out/
 product/picker_out/
 app/assets/burst/
 mascot/preview_assets/
+
+# MilyApp (Shipaton app target): ship the generated Xcode project and its
+# resolved package versions so judges can clone → open → Run.
+!MilyApp/**
+.DS_Store

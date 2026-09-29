@@ -23,6 +23,11 @@ public struct BestTakeReport: Codable, Sendable {
     /// Per-person expression scores for every frame — the filmstrip data the
     /// per-person picker renders (which frame was best, how close the rest).
     public var scores: [PersonID: [Float]]
+    /// Per person: frames they can be swapped in from, best first — expression
+    /// score discounted by pose/size risk vs. the base, pose-unsafe frames
+    /// (risk ≥ `maxChoiceRisk`) dropped. Drives the tap-a-face picker. The base
+    /// frame is always included so "keep original" is a choice.
+    public var candidates: [PersonID: [Int]] = [:]
 }
 
 /// Level A end to end: plan → synthesize → finish → verify → assemble.
@@ -38,6 +43,9 @@ public struct BestTakePipeline: Sendable {
     public var checker: ArtifactChecker
     public var identity: IdentityChecker
     public var rngSeed: UInt64
+    /// Frames riskier than this (pose/roll/size delta vs. the base) are not
+    /// offered in the picker — they would fail verification or look wrong.
+    public var maxChoiceRisk: Float = 1.0
 
     public init(
         scorer: ExpressionScorer = HeuristicExpressionScorer(),
@@ -59,14 +67,20 @@ public struct BestTakePipeline: Sendable {
         self.rngSeed = rngSeed
     }
 
-    public func run(frames: [AnnotatedFrame]) -> (output: PixelImage, report: BestTakeReport) {
+    /// - Parameter overrides: person → frame the user picked in the face picker;
+    ///   replaces the planner's automatic donor choice for that person.
+    public func run(frames: [AnnotatedFrame], overrides: [PersonID: Int] = [:]) -> (output: PixelImage, report: BestTakeReport) {
         precondition(!frames.isEmpty, "pipeline needs at least one frame")
 
         var people = Set<PersonID>()
         for f in frames { people.formUnion(f.faces.keys) }
         let ordered = people.sorted()
 
-        let plan = planner.plan(frames: frames, people: ordered, scorer: scorer, risk: risk)
+        var plan = planner.plan(frames: frames, people: ordered, scorer: scorer, risk: risk)
+        for (person, frame) in overrides where frames.indices.contains(frame) {
+            plan.donors[person] = frame
+        }
+        let candidates = choiceCandidates(frames: frames, people: ordered, plan: plan)
         var output = frames[plan.baseFrame].image
 
         var reports: [PersonReport] = []
@@ -117,6 +131,24 @@ public struct BestTakePipeline: Sendable {
             }
         }
 
-        return (output, BestTakeReport(baseFrame: plan.baseFrame, frameCount: frames.count, people: reports, scores: plan.scoreMatrix))
+        return (output, BestTakeReport(baseFrame: plan.baseFrame, frameCount: frames.count, people: reports, scores: plan.scoreMatrix, candidates: candidates))
+    }
+
+    private func choiceCandidates(frames: [AnnotatedFrame], people: [PersonID],
+                                  plan: GroupPlanner.TakePlan) -> [PersonID: [Int]] {
+        var out: [PersonID: [Int]] = [:]
+        for p in people {
+            guard let baseFace = frames[plan.baseFrame].faces[p] else { continue }
+            var ranked: [(frame: Int, value: Float)] = []
+            for (f, frame) in frames.enumerated() {
+                guard let face = frame.faces[p], frame.personMasks[p] != nil || f == plan.baseFrame else { continue }
+                let r = f == plan.baseFrame ? 0 : risk.risk(base: baseFace, donor: face)
+                guard r < maxChoiceRisk else { continue }
+                let score = plan.scoreMatrix[p]?[f] ?? 0
+                ranked.append((f, score - planner.riskWeight * r))
+            }
+            out[p] = ranked.sorted { $0.value > $1.value }.map(\.frame)
+        }
+        return out
     }
 }

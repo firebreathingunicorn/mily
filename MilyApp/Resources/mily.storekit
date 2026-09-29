@@ -1,0 +1,33 @@
+{
+  "identifier" : "CAEC1137-1CAE-414D-8ADE-957345B8C409",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "6.99",
+      "familyShareable" : true,
+      "internalID" : "6F7B2A61",
+      "localizations" : [
+        {
+          "description" : "Unlimited fixes and full-quality exports, forever.",
+          "displayName" : "Mily Pro",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "mily_lifetime",
+      "referenceName" : "Mily Pro (Lifetime)",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {
+
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 4,
+    "minor" : 0
+  }
+}

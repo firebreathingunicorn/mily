@@ -1,0 +1,694 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		01337520D9C4465432ACC16B /* mily.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 61DE5125A09DE47D49101766 /* mily.storekit */; };
+		095044FC6B7E60638C17E4E3 /* stretching_160.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BB4DE1BF6AF5C90AE129CD7 /* stretching_160.png */; };
+		0A9D21B1ACDF8693795E3D0C /* mily.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 18BDA1A1C9A04DBD19533E29 /* mily.storekit */; };
+		0F807C0FDA9578A5F3AAA201 /* snowman_160.png in Resources */ = {isa = PBXBuildFile; fileRef = C053560000D2CEFC42294652 /* snowman_160.png */; };
+		151FAC36FAF9F993DE986D5C /* plane_160.png in Resources */ = {isa = PBXBuildFile; fileRef = 15FD0B939BCDC2A23B50BB60 /* plane_160.png */; };
+		1B5FEDF480418B7651EE9E26 /* boing_160.png in Resources */ = {isa = PBXBuildFile; fileRef = A0726ED63307C6512B383B28 /* boing_160.png */; };
+		23825F7639EE9C87DA2E69BE /* treadmill_160.png in Resources */ = {isa = PBXBuildFile; fileRef = 5035A9C26E384121AC6447D9 /* treadmill_160.png */; };
+		30AFFB96E95B7C1026366654 /* volleyball_160.png in Resources */ = {isa = PBXBuildFile; fileRef = 14CF8EA593B24650524069F4 /* volleyball_160.png */; };
+		409D968EC0876C5CA8C3D39C /* rain_160.png in Resources */ = {isa = PBXBuildFile; fileRef = 74CC02285C4E0EE39E31DE41 /* rain_160.png */; };
+		516CC0AE8960054F3F4C4A12 /* basketball_160.png in Resources */ = {isa = PBXBuildFile; fileRef = 3513D6EFD3CEBD5A859EBEFB /* basketball_160.png */; };
+		5CC17ABA4E7503EFF0775B8F /* campfire_160.png in Resources */ = {isa = PBXBuildFile; fileRef = D10DA77BCBC6273B3DC720A7 /* campfire_160.png */; };
+		6325CCB10C9872F4895DA97D /* MascotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5B86002A285AEA59722544 /* MascotView.swift */; };
+		674D8CEE952FE356CC212F10 /* FixSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D7C88002B3E792D1764E07 /* FixSession.swift */; };
+		68D6E97652847F7F78D749AD /* MilyCore in Frameworks */ = {isa = PBXBuildFile; productRef = D68CE2E433E53006C240B639 /* MilyCore */; };
+		6C23D3F32585C73B7528120B /* grooming_160.png in Resources */ = {isa = PBXBuildFile; fileRef = 70449CDE0DADBDCB715871A3 /* grooming_160.png */; };
+		6EEE3C3F433B274C174D562B /* weightlifting_160.png in Resources */ = {isa = PBXBuildFile; fileRef = CD3E1C5C0E1D9E960584EA1F /* weightlifting_160.png */; };
+		6F9E817A4F64F03D25F3E765 /* baking_160.png in Resources */ = {isa = PBXBuildFile; fileRef = 18001DC6777941B7D41B7DFC /* baking_160.png */; };
+		738C2906BD3BF8CD1FC35D67 /* suit_160.png in Resources */ = {isa = PBXBuildFile; fileRef = 0166B9E9A0CC485C042AD6F0 /* suit_160.png */; };
+		74510FD75798B86D772AB9D3 /* MilyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E87023951F4A90BFD7E01D5 /* MilyApp.swift */; };
+		75F9DA355B01ED4F7EAEA199 /* reading_160.png in Resources */ = {isa = PBXBuildFile; fileRef = D74DE0E6F19CFFD40F58CA06 /* reading_160.png */; };
+		7603CE3E4C421301C2785446 /* graduating_160.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D91F5A2DB7D8C2AEB03A772 /* graduating_160.png */; };
+		760B7E40346EB87DCCD9DCC4 /* flexing_160.png in Resources */ = {isa = PBXBuildFile; fileRef = 8106212CD72BC986D29DA9FC /* flexing_160.png */; };
+		79F8BB052E3B1D2BC6702897 /* VideoFrames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791F9AAD042F9BC4534961C1 /* VideoFrames.swift */; };
+		8049FB7905BAB5B3266D6BD6 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D33E02830372E098DF9F4 /* ResultView.swift */; };
+		80A0A17F9D357F839435CE1D /* dance_160.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E5429C0B1B735613DBDAA8E /* dance_160.png */; };
+		88E60DB38D1F51AF89EA219B /* discovery_160.png in Resources */ = {isa = PBXBuildFile; fileRef = 097328154CE4A43A947E3527 /* discovery_160.png */; };
+		8B89D1DFFF27B0974BE41305 /* idle_160.png in Resources */ = {isa = PBXBuildFile; fileRef = B1A16027866FB4A45382F236 /* idle_160.png */; };
+		907E98928066DBC59B4D9E58 /* noodles_160.png in Resources */ = {isa = PBXBuildFile; fileRef = E689AE5A7ABF61192DAA3A00 /* noodles_160.png */; };
+		9ADAC6D98B349A8EE0DE6577 /* MilyFunnelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841485DBDBA9780C26BD874F /* MilyFunnelTests.swift */; };
+		9BF7B26792E3D25E4E5B8E0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C83CA99D2C5EE0E46237AEFF /* Assets.xcassets */; };
+		9E15FB5E10A91ED86952989A /* piano_160.png in Resources */ = {isa = PBXBuildFile; fileRef = 872A8080DE21A258A9FEE528 /* piano_160.png */; };
+		A2410FF9A10A11DE179BB4C8 /* peeking_160.png in Resources */ = {isa = PBXBuildFile; fileRef = A1244330120B791F47A8A344 /* peeking_160.png */; };
+		ACF5FF3CA679DE7703D31E11 /* floating_160.png in Resources */ = {isa = PBXBuildFile; fileRef = 89AEC300730B58486D03DD11 /* floating_160.png */; };
+		AEAFDC9BFE5FAADDBE986E81 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7B6B54A68EEB07FE640D32 /* PaywallView.swift */; };
+		AFEEFBC3982E83E6A0954088 /* phone_160.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E26D7BCAC2CB13CA108211B /* phone_160.png */; };
+		BFE665D93EC32F6C77AD8E0A /* ProcessingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C584B44233C2E6A55EED68BA /* ProcessingView.swift */; };
+		D25C064F4273CE91A4F431F9 /* MilyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B546C3029433CA1CEEDF3F07 /* MilyStore.swift */; };
+		DD892F0FB901301A82DABFB8 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = F7E7A84095F0E33350C20116 /* RevenueCat */; };
+		E7E39C84D9452FE49A4AAE74 /* eating_160.png in Resources */ = {isa = PBXBuildFile; fileRef = B3FD2DB2356FDD8A8FBFDA1E /* eating_160.png */; };
+		EEF7344BC3D5F8C6A20A3E82 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BB916BA3FFDAA5271C2416 /* RootView.swift */; };
+		F2D442D5E3778E46315AD3BD /* RevenueCatUI in Frameworks */ = {isa = PBXBuildFile; productRef = F2CA7FB49D7A4D171682D94B /* RevenueCatUI */; };
+		FB0F68F9DFCDEC3409DDF97E /* tv_160.png in Resources */ = {isa = PBXBuildFile; fileRef = E3728E371B478451D1FB1EA9 /* tv_160.png */; };
+		FD23B493CEE02D368CB424C3 /* gaming_160.png in Resources */ = {isa = PBXBuildFile; fileRef = F9AC64200F395978BAB1EBAA /* gaming_160.png */; };
+		FD2FA30F830F8EEC5FD7F0D7 /* firefighter_160.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DBDB4A706FF0D949F22866D /* firefighter_160.png */; };
+		FEA7DFDD1BA31A8CC4818F35 /* zapped_160.png in Resources */ = {isa = PBXBuildFile; fileRef = 098E2DD1CE46A0C72D6CD372 /* zapped_160.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		44AC8111866924A306D43679 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9348511EAD3A039FEFF207FD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C7BEBF1C1BA21B649E040D57;
+			remoteInfo = MilyApp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0166B9E9A0CC485C042AD6F0 /* suit_160.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = suit_160.png; sourceTree = "<group>"; };
+		083D33E02830372E098DF9F4 /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
+		097328154CE4A43A947E3527 /* discovery_160.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = discovery_160.png; sourceTree = "<group>"; };
+		098E2DD1CE46A0C72D6CD372 /* zapped_160.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zapped_160.png; sourceTree = "<group>"; };
+		0D5B86002A285AEA59722544 /* MascotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MascotView.swift; sourceTree = "<group>"; };
+		0DBDB4A706FF0D949F22866D /* firefighter_160.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = firefighter_160.png; sourceTree = "<group>"; };
+		14CF8EA593B24650524069F4 /* volleyball_160.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = volleyball_160.png; sourceTree = "<group>"; };
+		15FD0B939BCDC2A23B50BB60 /* plane_160.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plane_160.png; sourceTree = "<group>"; };
+		18001DC6777941B7D41B7DFC /* baking_160.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = baking_160.png; sourceTree = "<group>"; };
+		18BDA1A1C9A04DBD19533E29 /* mily.storekit */ = {isa = PBXFileReference; path = mily.storekit; sourceTree = "<group>"; };
+		1CF2EAD9812A73F086477382 /* MilyAppUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = MilyAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D7B6B54A68EEB07FE640D32 /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
+		2E26D7BCAC2CB13CA108211B /* phone_160.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phone_160.png; sourceTree = "<group>"; };
+		3513D6EFD3CEBD5A859EBEFB /* basketball_160.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basketball_160.png; sourceTree = "<group>"; };
+		3BB4DE1BF6AF5C90AE129CD7 /* stretching_160.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stretching_160.png; sourceTree = "<group>"; };
+		428AABBF14DB064AEA961D3B /* MilyApp.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = MilyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5035A9C26E384121AC6447D9 /* treadmill_160.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = treadmill_160.png; sourceTree = "<group>"; };
+		5EC0E4AF04168D7231D73A39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		61DE5125A09DE47D49101766 /* mily.storekit */ = {isa = PBXFileReference; path = mily.storekit; sourceTree = "<group>"; };
+		69BB916BA3FFDAA5271C2416 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		6D91F5A2DB7D8C2AEB03A772 /* graduating_160.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = graduating_160.png; sourceTree = "<group>"; };
+		70449CDE0DADBDCB715871A3 /* grooming_160.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grooming_160.png; sourceTree = "<group>"; };
+		74CC02285C4E0EE39E31DE41 /* rain_160.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rain_160.png; sourceTree = "<group>"; };
+		791F9AAD042F9BC4534961C1 /* VideoFrames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoFrames.swift; sourceTree = "<group>"; };
+		8106212CD72BC986D29DA9FC /* flexing_160.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flexing_160.png; sourceTree = "<group>"; };
+		841485DBDBA9780C26BD874F /* MilyFunnelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilyFunnelTests.swift; sourceTree = "<group>"; };
+		872A8080DE21A258A9FEE528 /* piano_160.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = piano_160.png; sourceTree = "<group>"; };
+		89AEC300730B58486D03DD11 /* floating_160.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = floating_160.png; sourceTree = "<group>"; };
+		8E5429C0B1B735613DBDAA8E /* dance_160.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dance_160.png; sourceTree = "<group>"; };
+		9E87023951F4A90BFD7E01D5 /* MilyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilyApp.swift; sourceTree = "<group>"; };
+		A034C6C33E1A56B15482B89D /* Mily */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Mily; path = ..; sourceTree = SOURCE_ROOT; };
+		A0726ED63307C6512B383B28 /* boing_160.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = boing_160.png; sourceTree = "<group>"; };
+		A1244330120B791F47A8A344 /* peeking_160.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = peeking_160.png; sourceTree = "<group>"; };
+		B1A16027866FB4A45382F236 /* idle_160.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = idle_160.png; sourceTree = "<group>"; };
+		B3FD2DB2356FDD8A8FBFDA1E /* eating_160.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eating_160.png; sourceTree = "<group>"; };
+		B546C3029433CA1CEEDF3F07 /* MilyStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilyStore.swift; sourceTree = "<group>"; };
+		C053560000D2CEFC42294652 /* snowman_160.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = snowman_160.png; sourceTree = "<group>"; };
+		C584B44233C2E6A55EED68BA /* ProcessingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingView.swift; sourceTree = "<group>"; };
+		C83CA99D2C5EE0E46237AEFF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C9D7C88002B3E792D1764E07 /* FixSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixSession.swift; sourceTree = "<group>"; };
+		CD3E1C5C0E1D9E960584EA1F /* weightlifting_160.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weightlifting_160.png; sourceTree = "<group>"; };
+		D10DA77BCBC6273B3DC720A7 /* campfire_160.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = campfire_160.png; sourceTree = "<group>"; };
+		D74DE0E6F19CFFD40F58CA06 /* reading_160.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reading_160.png; sourceTree = "<group>"; };
+		E3728E371B478451D1FB1EA9 /* tv_160.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tv_160.png; sourceTree = "<group>"; };
+		E689AE5A7ABF61192DAA3A00 /* noodles_160.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noodles_160.png; sourceTree = "<group>"; };
+		F9AC64200F395978BAB1EBAA /* gaming_160.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gaming_160.png; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AB310A415B42BAB3B12DAEAF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68D6E97652847F7F78D749AD /* MilyCore in Frameworks */,
+				DD892F0FB901301A82DABFB8 /* RevenueCat in Frameworks */,
+				F2D442D5E3778E46315AD3BD /* RevenueCatUI in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		19A2CBC696B99F79625BA6AC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0D5B86002A285AEA59722544 /* MascotView.swift */,
+				1D7B6B54A68EEB07FE640D32 /* PaywallView.swift */,
+				C584B44233C2E6A55EED68BA /* ProcessingView.swift */,
+				083D33E02830372E098DF9F4 /* ResultView.swift */,
+				69BB916BA3FFDAA5271C2416 /* RootView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2F689C3CC082B19C5FAFD7DD /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				5EC0E4AF04168D7231D73A39 /* Info.plist */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		34F3C347B73317B24E7D63D0 /* MilyApp */ = {
+			isa = PBXGroup;
+			children = (
+				9E87023951F4A90BFD7E01D5 /* MilyApp.swift */,
+				AB0934CD16D380755314985B /* Pipeline */,
+				5FE3CFCA782B8B07C898D7F6 /* Store */,
+				2F689C3CC082B19C5FAFD7DD /* Support */,
+				19A2CBC696B99F79625BA6AC /* Views */,
+			);
+			path = MilyApp;
+			sourceTree = "<group>";
+		};
+		562C3EDD37509B32051C3469 /* mascot */ = {
+			isa = PBXGroup;
+			children = (
+				18001DC6777941B7D41B7DFC /* baking_160.png */,
+				3513D6EFD3CEBD5A859EBEFB /* basketball_160.png */,
+				A0726ED63307C6512B383B28 /* boing_160.png */,
+				D10DA77BCBC6273B3DC720A7 /* campfire_160.png */,
+				8E5429C0B1B735613DBDAA8E /* dance_160.png */,
+				097328154CE4A43A947E3527 /* discovery_160.png */,
+				B3FD2DB2356FDD8A8FBFDA1E /* eating_160.png */,
+				0DBDB4A706FF0D949F22866D /* firefighter_160.png */,
+				8106212CD72BC986D29DA9FC /* flexing_160.png */,
+				89AEC300730B58486D03DD11 /* floating_160.png */,
+				F9AC64200F395978BAB1EBAA /* gaming_160.png */,
+				6D91F5A2DB7D8C2AEB03A772 /* graduating_160.png */,
+				70449CDE0DADBDCB715871A3 /* grooming_160.png */,
+				B1A16027866FB4A45382F236 /* idle_160.png */,
+				E689AE5A7ABF61192DAA3A00 /* noodles_160.png */,
+				A1244330120B791F47A8A344 /* peeking_160.png */,
+				2E26D7BCAC2CB13CA108211B /* phone_160.png */,
+				872A8080DE21A258A9FEE528 /* piano_160.png */,
+				15FD0B939BCDC2A23B50BB60 /* plane_160.png */,
+				74CC02285C4E0EE39E31DE41 /* rain_160.png */,
+				D74DE0E6F19CFFD40F58CA06 /* reading_160.png */,
+				C053560000D2CEFC42294652 /* snowman_160.png */,
+				3BB4DE1BF6AF5C90AE129CD7 /* stretching_160.png */,
+				0166B9E9A0CC485C042AD6F0 /* suit_160.png */,
+				5035A9C26E384121AC6447D9 /* treadmill_160.png */,
+				E3728E371B478451D1FB1EA9 /* tv_160.png */,
+				14CF8EA593B24650524069F4 /* volleyball_160.png */,
+				CD3E1C5C0E1D9E960584EA1F /* weightlifting_160.png */,
+				098E2DD1CE46A0C72D6CD372 /* zapped_160.png */,
+			);
+			path = mascot;
+			sourceTree = "<group>";
+		};
+		5FE3CFCA782B8B07C898D7F6 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				B546C3029433CA1CEEDF3F07 /* MilyStore.swift */,
+			);
+			path = Store;
+			sourceTree = "<group>";
+		};
+		729C5901DC56096652202A1A /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				A034C6C33E1A56B15482B89D /* Mily */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		819ADF1735F480041040A80B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C83CA99D2C5EE0E46237AEFF /* Assets.xcassets */,
+				61DE5125A09DE47D49101766 /* mily.storekit */,
+				562C3EDD37509B32051C3469 /* mascot */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		9C96D3BD74AB36B6A9C96F64 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				428AABBF14DB064AEA961D3B /* MilyApp.app */,
+				1CF2EAD9812A73F086477382 /* MilyAppUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A3AD75B1158B2397BE5387C3 /* UITests */ = {
+			isa = PBXGroup;
+			children = (
+				18BDA1A1C9A04DBD19533E29 /* mily.storekit */,
+				841485DBDBA9780C26BD874F /* MilyFunnelTests.swift */,
+			);
+			path = UITests;
+			sourceTree = "<group>";
+		};
+		AB0934CD16D380755314985B /* Pipeline */ = {
+			isa = PBXGroup;
+			children = (
+				C9D7C88002B3E792D1764E07 /* FixSession.swift */,
+				791F9AAD042F9BC4534961C1 /* VideoFrames.swift */,
+			);
+			path = Pipeline;
+			sourceTree = "<group>";
+		};
+		EFE28A277160A3FE3D04FB09 = {
+			isa = PBXGroup;
+			children = (
+				34F3C347B73317B24E7D63D0 /* MilyApp */,
+				729C5901DC56096652202A1A /* Packages */,
+				819ADF1735F480041040A80B /* Resources */,
+				A3AD75B1158B2397BE5387C3 /* UITests */,
+				9C96D3BD74AB36B6A9C96F64 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C7BEBF1C1BA21B649E040D57 /* MilyApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DDB0B56DA9C1E1AE6B997338 /* Build configuration list for PBXNativeTarget "MilyApp" */;
+			buildPhases = (
+				8E1C8E84B61BC346623D672F /* Sources */,
+				2CD52B7EED3D310DFC56221A /* Resources */,
+				AB310A415B42BAB3B12DAEAF /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MilyApp;
+			packageProductDependencies = (
+				D68CE2E433E53006C240B639 /* MilyCore */,
+				F7E7A84095F0E33350C20116 /* RevenueCat */,
+				F2CA7FB49D7A4D171682D94B /* RevenueCatUI */,
+			);
+			productName = MilyApp;
+			productReference = 428AABBF14DB064AEA961D3B /* MilyApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CD8A523D846B57F4DCB897C8 /* MilyAppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9090B37B07986680E77F9457 /* Build configuration list for PBXNativeTarget "MilyAppUITests" */;
+			buildPhases = (
+				8A40C8A8343CB13D0616EC3F /* Sources */,
+				B806B1883EAF870A1C8D2DB3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CCB1827F240FF738283B3411 /* PBXTargetDependency */,
+			);
+			name = MilyAppUITests;
+			packageProductDependencies = (
+			);
+			productName = MilyAppUITests;
+			productReference = 1CF2EAD9812A73F086477382 /* MilyAppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9348511EAD3A039FEFF207FD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					C7BEBF1C1BA21B649E040D57 = {
+						ProvisioningStyle = Automatic;
+					};
+					CD8A523D846B57F4DCB897C8 = {
+						ProvisioningStyle = Automatic;
+						TestTargetID = C7BEBF1C1BA21B649E040D57;
+					};
+				};
+			};
+			buildConfigurationList = CDBEA0DE1651DE99AD2E413D /* Build configuration list for PBXProject "MilyApp" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = EFE28A277160A3FE3D04FB09;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				C8696868CCC0CF132EE85E39 /* XCRemoteSwiftPackageReference "purchases-ios" */,
+				21EBB3D6C27589C99C16BA9D /* XCLocalSwiftPackageReference ".." */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 9C96D3BD74AB36B6A9C96F64 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C7BEBF1C1BA21B649E040D57 /* MilyApp */,
+				CD8A523D846B57F4DCB897C8 /* MilyAppUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2CD52B7EED3D310DFC56221A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9BF7B26792E3D25E4E5B8E0A /* Assets.xcassets in Resources */,
+				6F9E817A4F64F03D25F3E765 /* baking_160.png in Resources */,
+				516CC0AE8960054F3F4C4A12 /* basketball_160.png in Resources */,
+				1B5FEDF480418B7651EE9E26 /* boing_160.png in Resources */,
+				5CC17ABA4E7503EFF0775B8F /* campfire_160.png in Resources */,
+				80A0A17F9D357F839435CE1D /* dance_160.png in Resources */,
+				88E60DB38D1F51AF89EA219B /* discovery_160.png in Resources */,
+				E7E39C84D9452FE49A4AAE74 /* eating_160.png in Resources */,
+				FD2FA30F830F8EEC5FD7F0D7 /* firefighter_160.png in Resources */,
+				760B7E40346EB87DCCD9DCC4 /* flexing_160.png in Resources */,
+				ACF5FF3CA679DE7703D31E11 /* floating_160.png in Resources */,
+				FD23B493CEE02D368CB424C3 /* gaming_160.png in Resources */,
+				7603CE3E4C421301C2785446 /* graduating_160.png in Resources */,
+				6C23D3F32585C73B7528120B /* grooming_160.png in Resources */,
+				8B89D1DFFF27B0974BE41305 /* idle_160.png in Resources */,
+				01337520D9C4465432ACC16B /* mily.storekit in Resources */,
+				907E98928066DBC59B4D9E58 /* noodles_160.png in Resources */,
+				A2410FF9A10A11DE179BB4C8 /* peeking_160.png in Resources */,
+				AFEEFBC3982E83E6A0954088 /* phone_160.png in Resources */,
+				9E15FB5E10A91ED86952989A /* piano_160.png in Resources */,
+				151FAC36FAF9F993DE986D5C /* plane_160.png in Resources */,
+				409D968EC0876C5CA8C3D39C /* rain_160.png in Resources */,
+				75F9DA355B01ED4F7EAEA199 /* reading_160.png in Resources */,
+				0F807C0FDA9578A5F3AAA201 /* snowman_160.png in Resources */,
+				095044FC6B7E60638C17E4E3 /* stretching_160.png in Resources */,
+				738C2906BD3BF8CD1FC35D67 /* suit_160.png in Resources */,
+				23825F7639EE9C87DA2E69BE /* treadmill_160.png in Resources */,
+				FB0F68F9DFCDEC3409DDF97E /* tv_160.png in Resources */,
+				30AFFB96E95B7C1026366654 /* volleyball_160.png in Resources */,
+				6EEE3C3F433B274C174D562B /* weightlifting_160.png in Resources */,
+				FEA7DFDD1BA31A8CC4818F35 /* zapped_160.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B806B1883EAF870A1C8D2DB3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A9D21B1ACDF8693795E3D0C /* mily.storekit in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8A40C8A8343CB13D0616EC3F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9ADAC6D98B349A8EE0DE6577 /* MilyFunnelTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E1C8E84B61BC346623D672F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				674D8CEE952FE356CC212F10 /* FixSession.swift in Sources */,
+				6325CCB10C9872F4895DA97D /* MascotView.swift in Sources */,
+				74510FD75798B86D772AB9D3 /* MilyApp.swift in Sources */,
+				D25C064F4273CE91A4F431F9 /* MilyStore.swift in Sources */,
+				AEAFDC9BFE5FAADDBE986E81 /* PaywallView.swift in Sources */,
+				BFE665D93EC32F6C77AD8E0A /* ProcessingView.swift in Sources */,
+				8049FB7905BAB5B3266D6BD6 /* ResultView.swift in Sources */,
+				EEF7344BC3D5F8C6A20A3E82 /* RootView.swift in Sources */,
+				79F8BB052E3B1D2BC6702897 /* VideoFrames.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CCB1827F240FF738283B3411 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C7BEBF1C1BA21B649E040D57 /* MilyApp */;
+			targetProxy = 44AC8111866924A306D43679 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		03AC22147B9DDC232E067985 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = MilyApp/Support/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mily.app;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1C1B8C69A2FA7FCE77CFCE5C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = MilyApp/Support/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mily.app;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		5BF7C9C9B2638E2C9053C017 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.10;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		8B3A5A904FA4386B8CA1905B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.10;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		8C69CCC16D466D5AA9869D74 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mily.app.uitests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MilyApp;
+			};
+			name = Release;
+		};
+		D4A548D741DB243FF75DCA8D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mily.app.uitests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MilyApp;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9090B37B07986680E77F9457 /* Build configuration list for PBXNativeTarget "MilyAppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4A548D741DB243FF75DCA8D /* Debug */,
+				8C69CCC16D466D5AA9869D74 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		CDBEA0DE1651DE99AD2E413D /* Build configuration list for PBXProject "MilyApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8B3A5A904FA4386B8CA1905B /* Debug */,
+				5BF7C9C9B2638E2C9053C017 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		DDB0B56DA9C1E1AE6B997338 /* Build configuration list for PBXNativeTarget "MilyApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				03AC22147B9DDC232E067985 /* Debug */,
+				1C1B8C69A2FA7FCE77CFCE5C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		21EBB3D6C27589C99C16BA9D /* XCLocalSwiftPackageReference ".." */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ..;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C8696868CCC0CF132EE85E39 /* XCRemoteSwiftPackageReference "purchases-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RevenueCat/purchases-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D68CE2E433E53006C240B639 /* MilyCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = MilyCore;
+		};
+		F2CA7FB49D7A4D171682D94B /* RevenueCatUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C8696868CCC0CF132EE85E39 /* XCRemoteSwiftPackageReference "purchases-ios" */;
+			productName = RevenueCatUI;
+		};
+		F7E7A84095F0E33350C20116 /* RevenueCat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C8696868CCC0CF132EE85E39 /* XCRemoteSwiftPackageReference "purchases-ios" */;
+			productName = RevenueCat;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 9348511EAD3A039FEFF207FD /* Project object */;
+}
