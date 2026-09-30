@@ -53,6 +53,7 @@ Thirty-five actions, five outputs each:
 | `dance` | seamless | disco night: ball throwing light beams, big side-to-side moves, arm pump, notes bouncing |
 | `weightlifting` | seamless | the clean and press in a headband: grip, clean to the chest, press overhead, trembling sweat hold, drop with a dust thud |
 | `suit` | seamless | FRESH: adjusts the red tie, sunglasses slide on, confident strut, finger guns with sparkles |
+| `camera` | seamless | Best Take in one loop: raises the camera to the eye, viewfinder squint, FLASH, reviews the shot on the back screen, celebrates the keep |
 | `baseball` | one-shot | at the plate: the pitch comes in, one level swing — CRACK — ball rockets off with speed lines while the batter watches it fly |
 | `volleyball` | seamless | bump off the forearms, watch it rise, jump and SPIKE it down — serve comes back in |
 | `grooming` | seamless | paw lick with tongue darts, cheek wipe, perks up |
@@ -103,7 +104,7 @@ edge against the video frame's left edge and keep the cat ~10–15% of frame wid
 python3 tools/build_mascot.py
 
 # audit + encode each action into assets/ (plus mirrored _r twins)
-for a in idle waving floating sleeping glitching peeking running zapped chasing reading eating grooming boing tv treadmill flexing stretching phone graduating basketball snowman rain piano baking firefighter discovery plane noodles gaming campfire dance weightlifting suit baseball volleyball; do
+for a in idle waving floating sleeping glitching peeking running zapped chasing reading eating grooming boing tv treadmill flexing stretching phone graduating basketball snowman rain piano baking firefighter discovery plane noodles gaming campfire dance weightlifting suit camera baseball volleyball; do
   python3 tools/convert_transparent.py encode --frames frames/$a --name $a --out assets/$a
 done
 for a in running chasing peeking; do

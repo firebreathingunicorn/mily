@@ -786,6 +786,19 @@ def frames_volleyball():
     return [scene(*s) for s in seq]
 
 
+def frames_camera():
+    """Best Take in one loop: raises the camera, squints through the
+    viewfinder, FLASH, lowers it to review the shot on the screen, then
+    celebrates the keep. Seamless loop; returns Images."""
+    from mascot_sprite import draw_cat_camera
+    seq = [("down", 0), ("down", 1),
+           ("aim", 0), ("aim", 1), ("squint", 0), ("squint", 1),
+           ("flash", 0), ("flash", 1),
+           ("review", 0), ("review", 1), ("review", 0),
+           ("celebrate", 0), ("celebrate", 1), ("celebrate", 0)]
+    return [draw_cat_camera(s, v) for s, v in seq]
+
+
 def frames_grooming():
     """Paw-lick groom with tongue darts, a cheek wipe, then perks up.
     Seamless loop; returns Images."""

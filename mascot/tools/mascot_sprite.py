@@ -1644,6 +1644,72 @@ def draw_batter(phase, var=0):
     return im
 
 
+def draw_cat_camera(state, var=0):
+    """Best Take's own mascot doing the thing: raises the camera to the
+    eye, squints through the viewfinder, FLASH (with a white pop), lowers
+    it to review the shot on the back screen, celebrates the keep.
+    state: 'down' | 'aim' | 'squint' | 'flash' | 'review' | 'celebrate'.
+    var alternates burst size / squint eye."""
+    poses = {
+        "down": {"gaze": "down", "head_dy": 1},
+        "aim": {"gaze": "center", "sway": 0.0},
+        "squint": {"gaze": "center", "sway": 0.0, "mouth": True},
+        "flash": {"gaze": "center", "sway": 0.0},
+        "review": {"gaze": "down", "happy": True, "head_dy": 1},
+        "celebrate": {"both_paws": True, "happy": True, "sway": 2.5,
+                      "ear_r_dx": 1},
+    }
+    im = draw_cat(poses[state])
+    d = ImageDraw.Draw(im)
+
+    if state in ("aim", "squint", "flash"):
+        # Camera raised: covers the muzzle, eyes peek over the top rim.
+        cx = 49
+        d.rounded_rectangle([37, 31, 61, 45], radius=3, fill=MARBLE)
+        d.rectangle([43, 28, 55, 31], fill=MARBLE)          # viewfinder hump
+        d.rectangle([56, 28, 58, 30], fill=NOSE)            # shutter button
+        d.ellipse([cx - 7, 33, cx + 7, 45], fill=MARBLE)    # lens barrel
+        d.ellipse([cx - 5, 35, cx + 5, 44], fill=SCREEN)    # lens glass
+        d.rectangle([cx - 2, 37, cx - 1, 38], fill=CREAM)   # lens glint
+        # paws gripping both sides
+        d.rounded_rectangle([33, 33, 40, 41], radius=2, fill=CREAM)
+        d.rounded_rectangle([58, 33, 65, 41], radius=2, fill=CREAM)
+        # viewfinder squint: one eye closes while aiming
+        if state == "squint":
+            if var == 0:
+                d.rectangle([40, 29, 44, 29], fill=BODY)
+                d.rectangle([40, 30, 44, 33], fill=EYE)
+            else:
+                d.rectangle([51, 29, 55, 29], fill=BODY)
+                d.rectangle([51, 30, 55, 33], fill=EYE)
+        if state == "flash":
+            r1 = 6 if var == 0 else 8
+            for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+                d.rectangle([cx + dx * r1 - 1, 38 + dy * r1 - 1,
+                             cx + dx * r1 + 1, 38 + dy * r1 + 1], fill=YOLK)
+            d.ellipse([cx - r1, 38 - r1, cx + r1, 38 + r1],
+                      fill=(255, 252, 235, 255))
+            d.rectangle([30, 16, 31, 20], fill=YOLK)
+            d.rectangle([68, 16, 69, 20], fill=YOLK)
+    else:
+        # Lowered / at rest: we see the camera's back with the preview.
+        cx = 49
+        top = 48 if state == "review" else 52
+        d.rounded_rectangle([cx - 12, top, cx + 12, top + 15], radius=3,
+                            fill=MARBLE)
+        d.rectangle([cx - 9, top + 3, cx + 2, top + 12], fill=SCREEN)
+        # the shot on the preview: sky, hill, sun
+        d.rectangle([cx - 8, top + 5, cx - 1, top + 8], fill=SWEAT)
+        d.rectangle([cx - 8, top + 9, cx - 1, top + 11], fill=LETTUCE)
+        d.rectangle([cx - 3, top + 5, cx - 2, top + 6], fill=YOLK)
+        d.rectangle([cx + 5, top + 4, cx + 9, top + 7], fill=BODY_DARK)  # dial
+        d.rounded_rectangle([cx - 9, top + 13, cx + 9, top + 15], radius=1,
+                            fill=BODY_DARK)
+        if state == "review":
+            d.rectangle([cx + 4, top + 9, cx + 10, top + 10], fill=CREAM)
+    return im
+
+
 def glitch_frame(im, bands, ghost=False, invert=False):
     """Retro glitch: horizontal slice shifts + optional ghost/invert flicker."""
     a = np.array(im)
