@@ -133,9 +133,9 @@ def frames_flexing():
 
 
 def frames_stretching():
-    """Flexibility flow: deep arch (chest low, tail up), hold, sway into the
-    dip (face to the sky), hold, settle, repeat. Seamless loop; returns
-    Images. The holds get a tiny 1px breathing bob."""
+    """Flexibility flow on the mat: deep arch (breathing), sway up into the
+    dip, reach over the head to each side, easy settle — then back into the
+    arch. Seamless loop; returns Images."""
     import numpy as np
     from PIL import Image
 
@@ -151,12 +151,15 @@ def frames_stretching():
         return Image.fromarray(out)
 
     seq = [
-        ("arch", 0), ("arch", 0), ("arch", 1), ("arch", 0),
-        ("dip", 0), ("dip", 0), ("dip", -1), ("dip", 0),
-        ("arch", 0), ("arch", 1), ("arch", 0), ("arch", 0),
-        ("settle", 0), ("settle", 0), ("settle", 0), ("settle", 0),
+        ("arch", 0), ("arch", 0), ("arch", 1), ("arch", 0), ("arch", 1),
+        ("dip", 0), ("dip", 0), ("dip", -1), ("dip", 0), ("dip", 1),
+        ("reach", 0), ("reach", 1), ("reach", 0), ("reach", 1), ("reach", 0),
+        ("settle", 0), ("settle", 0),
     ]
-    return [bob(draw_cat_stretch(s), dy) for s, dy in seq]
+    frames = [bob(draw_cat_stretch(s), dy) for s, dy in seq]
+    # mirrored reach: the other side gets equal love
+    frames += [f.transpose(Image.FLIP_LEFT_RIGHT) for f in frames[10:15]]
+    return frames
 
 
 def frames_phone():

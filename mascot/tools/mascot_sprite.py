@@ -880,11 +880,20 @@ def draw_cat_flex(state, headband=True):
 
 
 def draw_cat_stretch(phase):
-    """Morning yoga, side view facing right. 'arch': chest low between
-    forward-stretched paws, rear high, tail straight up. 'dip': front tall,
-    back dipped, face to the sky. 'settle' sits easy between flows."""
+    """Yoga flow on a mat, side view facing right. 'arch': chest low
+    between forward-stretched paws, rear high, tail straight up — the deep
+    morning stretch. 'dip': front tall, back swayed down, face to the sky.
+    'reach': sitting tall, one paw arcing overhead to the far side.
+    'settle': easy sit between flows. Everything breathes via the caller's
+    1px bob."""
     im = new_canvas()
     d = ImageDraw.Draw(im)
+
+    # Yoga mat: blue with a cream stripe and a rolled end at the right.
+    d.rounded_rectangle([10, 70, 84, 79], radius=4, fill=SWEAT)
+    d.rectangle([14, 71, 80, 72], fill=(150, 190, 226, 255))
+    d.ellipse([78, 66, 88, 80], fill=(120, 165, 208, 255))
+    d.ellipse([81, 69, 85, 77], fill=SWEAT)
 
     def leg(x_from, y_from, x_to, y_to):
         d.line([(x_from, y_from), (x_to, y_to)], fill=BODY, width=4)
@@ -901,14 +910,14 @@ def draw_cat_stretch(phase):
         leg(53, 54, 55, 70)
         leg(28, 56, 12, 68)
         leg(31, 56, 17, 70)
-        # head low between the paws
+        # head low between the paws, serene
         d.rounded_rectangle([6, 40, 26, 58], radius=8, fill=BODY)
         d.ellipse([6, 50, 26, 62], fill=BODY)
         for cx, dy in [(12, -1), (19, -2)]:
             d.polygon([(cx + 4, 42 + dy), (cx - 2, 33 + dy), (cx + 6, 44 + dy)], fill=BODY)
             d.ellipse([cx - 3, 34 + dy, cx + 1, 38 + dy], fill=MARBLE)
         d.rectangle([6, 45, 26, 48], fill=BOOK_RED)  # headband
-        d.rectangle([16, 47, 20, 51], fill=EYE)
+        d.rectangle([17, 48, 21, 49], fill=EYE)      # closed, breathing out
         d.rectangle([22, 53, 25, 56], fill=CREAM)
         d.rectangle([24, 51, 25, 52], fill=NOSE)
         draw_blob(d, 58, 44, [(0, 0, 2.6), (3, 2, 2.0), (-1, 4, 1.8)], MARBLE)
@@ -917,7 +926,11 @@ def draw_cat_stretch(phase):
             t = i / 14
             r = 2.6 if t < 0.7 else 2.2
             ring = (0.35 <= t <= 0.5) or (0.62 <= t <= 0.77) or t > 0.9
-            d.ellipse([x - r, y - r, x + r, y + r], fill=MARBLE if ring else BODY)
+            col = MARBLE if ring else BODY
+            d.ellipse([x - r, y - r, x + r, y + r], fill=col)
+            if not ring:
+                d.rectangle([int(x - 1), int(y - r), int(x), int(y - r)],
+                            fill=BODY_LIGHT)
     elif phase == "dip":
         # front tall, back swayed down, face to the sky
         d.rounded_rectangle([30, 46, 66, 62], radius=10, fill=BODY)
@@ -934,8 +947,8 @@ def draw_cat_stretch(phase):
             d.polygon([(cx - 4, 28 + dy), (cx, 19 + dy), (cx + 4, 28 + dy)], fill=BODY)
             d.ellipse([cx - 2, 20 + dy, cx + 2, 24 + dy], fill=MARBLE)
         d.rectangle([38, 28, 58, 31], fill=BOOK_RED)  # headband
-        d.rectangle([42, 30, 46, 34], fill=EYE)
-        d.rectangle([44, 31, 45, 32], fill=WHISKER)
+        d.rectangle([44, 30, 46, 34], fill=EYE)
+        d.rectangle([44, 31, 45, 31], fill=BODY)      # serene half-closed
         d.rectangle([48, 38, 53, 40], fill=CREAM)
         d.rectangle([52, 36, 53, 37], fill=NOSE)
         draw_blob(d, 44, 30, HEAD_MARBLE, MARBLE)
@@ -945,702 +958,40 @@ def draw_cat_stretch(phase):
             r = 2.6 if t < 0.7 else 2.2
             ring = (0.35 <= t <= 0.5) or t > 0.8
             d.ellipse([x - r, y - r, x + r, y + r], fill=MARBLE if ring else BODY)
-        d.rectangle([58, 26, 60, 27], fill=WHISKER)  # whiskers up with the face
+        d.rectangle([58, 26, 60, 27], fill=WHISKER)
         d.rectangle([59, 29, 61, 29], fill=WHISKER)
+    elif phase == "reach":
+        # sitting tall, one paw arcing overhead to the far side
+        d.ellipse([52, 50, 74, 70], fill=BODY)                # folded haunch
+        d.rounded_rectangle([38, 40, 62, 66], radius=10, fill=BODY)
+        d.rectangle([42, 41, 58, 42], fill=BODY_LIGHT)
+        d.rectangle([42, 62, 58, 64], fill=BODY_DARK)
+        leg(44, 62, 42, 70)                                   # crossed legs
+        leg(56, 62, 60, 70)
+        # head tilted into the reach
+        d.rounded_rectangle([40, 22, 62, 42], radius=8, fill=BODY)
+        d.ellipse([40, 34, 62, 46], fill=BODY)
+        for cx, dy in [(46, -1), (55, 0)]:
+            d.polygon([(cx - 4, 26 + dy), (cx, 17 + dy), (cx + 4, 26 + dy)], fill=BODY)
+            d.ellipse([cx - 2, 18 + dy, cx + 2, 22 + dy], fill=MARBLE)
+        d.rectangle([40, 26, 60, 29], fill=BOOK_RED)  # headband
+        d.rectangle([45, 30, 49, 34], fill=EYE)
+        d.rectangle([45, 30, 49, 30], fill=BODY)      # serene reach squint
+        d.rectangle([52, 37, 57, 39], fill=CREAM)
+        d.rectangle([57, 35, 58, 36], fill=NOSE)
+        draw_blob(d, 46, 28, HEAD_MARBLE, MARBLE)
+        # reaching arm: shoulder arcs over the head to the far side
+        for i, (x, y) in enumerate(_bezier((52, 42), (58, 32), (68, 26), (74, 30), n=10)):
+            d.ellipse([x - 2, y - 2, x + 2, y + 2], fill=BODY)
+        d.ellipse([72, 27, 78, 33], fill=CREAM)       # paw past the far ear
+        # tail wrapped around the front paws
+        for i, (x, y) in enumerate(_bezier((60, 62), (58, 68), (48, 70), (38, 66), n=12)):
+            t = i / 12
+            r = 2.4 if t < 0.8 else 2.0
+            ring = (0.3 <= t <= 0.45) or (0.6 <= t <= 0.75)
+            d.ellipse([x - r, y - r, x + r, y + r], fill=MARBLE if ring else BODY)
     else:  # settle
-        im = draw_cat({"sway": 2.0, "gaze": "center"})
-        return im
-    return im
-
-
-def draw_cat_phone(state):
-    """Answering the phone: the retro brick cell rings on the floor, gets
-    held to the ear, chats with a gesticulating free paw, hears SHOCKING
-    news, recovers, waves bye. States: ring/pick/chat1/chat2/shock/bye."""
-    poses = {
-        "ring": {"gaze": "down", "ear_r_dx": 1, "sway": 2.5},
-        "pick": {"mouth": True, "head_dy": -1, "gaze": "center"},
-        "chat1": {"paw_side": "l", "paw_raise": -1, "mouth": True, "gaze": "up",
-                  "sway": 2.0, "ear_r_dx": 1},
-        "chat2": {"paw_side": "l", "paw_raise": 1, "mouth": True, "gaze": "center",
-                  "sway": -2.0},
-        "shock": {"shock": True, "paw_side": "l", "paw_raise": 0, "gaze": "right",
-                  "squash": 1},
-        "bye": {"paw_side": "l", "paw_raise": 2, "happy": True, "mouth": True,
-                "sway": 2.5},
-    }
-    im = draw_cat(poses[state])
-    d = ImageDraw.Draw(im)
-    if state == "ring":
-        # brick phone rattling on the floor
-        d.rounded_rectangle([58, 72, 66, 78], radius=2, fill=MARBLE)
-        d.rectangle([60, 74, 64, 75], fill=SWEAT)
-        d.rectangle([64, 70, 65, 71], fill=MARBLE)  # antenna
-        d.rectangle([56, 71, 57, 71], fill=BODY_DARK)
-        d.rectangle([68, 71, 69, 71], fill=BODY_DARK)
-        d.rectangle([62, 67, 63, 67], fill=BODY_DARK)
-    else:
-        # retro brick cell held to the ear: body, lit screen, buttons, antenna
-        d.rounded_rectangle([62, 24, 68, 36], radius=2, fill=MARBLE)
-        d.rectangle([64, 27, 67, 29], fill=SWEAT)
-        d.rectangle([64, 31, 65, 31], fill=CREAM)
-        d.rectangle([66, 31, 67, 31], fill=CREAM)
-        d.rectangle([65, 21, 66, 23], fill=MARBLE)
-        # paw gripping the phone
-        d.rounded_rectangle([59, 32, 66, 38], radius=3, fill=CREAM)
-        if state == "pick":
-            d.rectangle([46, 42, 47, 44], fill=EYE)  # "hello!"
-        if state == "shock":
-            d.rectangle([56, 18, 57, 19], fill=SWEAT)
-    return im
-
-
-CONFETTI = [(20, 10, BUN), (74, 6, NOSE), (28, 26, LETTUCE), (68, 22, SWEAT),
-            (14, 38, CREAM), (80, 34, PAGE), (58, 2, NOSE), (36, 4, SWEAT)]
-
-
-def _cap(d, x_off=0, y_off=0, tassel="right"):
-    """Mortarboard: flat diamond, center button, swinging tassel."""
-    d.polygon([(35 + x_off, 13 + y_off), (48 + x_off, 8 + y_off),
-               (61 + x_off, 13 + y_off), (48 + x_off, 18 + y_off)], fill=MARBLE)
-    d.rectangle([47 + x_off, 9 + y_off, 49 + x_off, 10 + y_off], fill=CREAM)
-    if tassel == "right":
-        d.rectangle([55 + x_off, 14 + y_off, 56 + x_off, 19 + y_off], fill=NOSE)
-        d.rectangle([55 + x_off, 19 + y_off, 57 + x_off, 21 + y_off], fill=NOSE)
-    else:
-        d.rectangle([41 + x_off, 14 + y_off, 42 + x_off, 19 + y_off], fill=NOSE)
-        d.rectangle([39 + x_off, 19 + y_off, 41 + x_off, 21 + y_off], fill=NOSE)
-
-
-def draw_cat_grad(state, var=0):
-    """Commencement! Gown + gold stole, diploma scroll, mortarboard with a
-    swinging tassel. state: 'ready' (proud, diploma in paws) | 'toss' (cap
-    in the air, arms up, confetti) | 'cheer' (cap back, celebrating).
-    var flips the tassel side / confetti jitter between frames."""
-    tassel = "left" if var == 1 else "right"
-    im = draw_cat({"gaze": "center", "mouth": state != "ready",
-                   "happy": state == "cheer", "both_paws": state != "ready",
-                   "sway": 1.5 if state == "ready" else -2.0})
-    d = ImageDraw.Draw(im)
-
-    # Gown over the body with a gold stole V.
-    d.rounded_rectangle([29, 45, 67, 79], radius=8, fill=MARBLE)
-    d.polygon([(39, 47), (45, 47), (49, 68), (43, 68)], fill=NOSE)
-    d.polygon([(57, 47), (51, 47), (47, 68), (53, 68)], fill=NOSE)
-
-    if state == "ready":
-        # diploma scroll held at the chest
-        d.rounded_rectangle([38, 57, 52, 61], radius=1, fill=PAGE)
-        d.rectangle([44, 57, 46, 61], fill=BOOK_RED)
-        _cap(d, tassel=tassel)
-        d.rounded_rectangle([35, 72, 43, 78], radius=3, fill=CREAM)
-        d.rounded_rectangle([53, 72, 61, 78], radius=3, fill=CREAM)
-    elif state == "toss":
-        # cap in the air, scroll raised in one paw, confetti raining
-        _cap(d, 0, -9 + var * 2, tassel=tassel)
-        d.rounded_rectangle([24, 26, 38, 30], radius=1, fill=PAGE)
-        d.rectangle([30, 26, 32, 30], fill=BOOK_RED)
-        for x, y, c in CONFETTI:
-            dy = var * 3
-            d.rectangle([x, y + dy, x + 1, y + 1 + dy], fill=c)
-    else:  # cheer
-        _cap(d, 0, 1, tassel=tassel)  # caught it, slightly askew
-        d.rounded_rectangle([24, 26, 38, 30], radius=1, fill=PAGE)
-        d.rectangle([30, 26, 32, 30], fill=BOOK_RED)
-        for x, y, c in CONFETTI[:6]:
-            dy = (1 - var) * 3
-            d.rectangle([x, y + 2 + dy, x + 1, y + 3 + dy], fill=c)
-    return im
-
-
-BALL = (216, 110, 48, 255)  # basketball orange
-
-
-def draw_basketball(d, x, y, rx=3, ry=3):
-    """Basketball with cross seams; wider+flatter when squashed on a bounce."""
-    d.ellipse([x - rx, y - ry, x + rx, y + ry], fill=BALL)
-    d.rectangle([x, y - ry + 1, x, y + ry - 1], fill=MARBLE)
-    d.rectangle([x - rx + 1, y, x + rx - 1, y], fill=MARBLE)
-
-
-def draw_hoop(d):
-    """Mini hoop in the top-right corner: backboard, rim, swaying net."""
-    d.rectangle([74, 2, 92, 15], fill=MARBLE)
-    d.rectangle([76, 4, 90, 12], fill=(226, 222, 210, 255))
-    d.rectangle([80, 6, 86, 10], fill=SCREEN)
-    d.rectangle([73, 16, 89, 17], fill=NOSE)  # rim
-    for i, x0 in enumerate((76, 81, 86)):
-        d.line([(x0, 18), (x0 + 3 if i != 1 else x0 - 1, 23)], fill=CREAM, width=1)
-    d.rectangle([79, 23, 86, 23], fill=CREAM)
-
-
-SNOW = (247, 240, 218, 255)
-SNOW_SHADE = (221, 212, 188, 255)
-
-
-def draw_snowman(d, level, rx_bottom=11):
-    """Snowman at the cat's right. level: 1 bottom ball, 2 +middle,
-    3 +head, 4 finished (coal face, carrot, stick arms, red scarf)."""
-    if level >= 1:
-        d.ellipse([74 - rx_bottom, 57, 74 + rx_bottom, 75], fill=SNOW)
-        d.rectangle([68, 71, 80, 73], fill=SNOW_SHADE)
-    if level >= 2:
-        d.ellipse([66, 43, 82, 57], fill=SNOW)
-        d.rectangle([74, 48, 74, 52], fill=MARBLE)
-        d.rectangle([74, 54, 74, 55], fill=MARBLE)
-    if level >= 3:
-        d.ellipse([68, 31, 80, 42], fill=SNOW)
-    if level >= 4:
-        d.rectangle([71, 34, 72, 35], fill=EYE)
-        d.rectangle([75, 34, 76, 35], fill=EYE)
-        d.polygon([(65, 36), (71, 35), (71, 38)], fill=BALL)  # carrot, facing cat
-        d.rectangle([67, 43, 81, 45], fill=BOOK_RED)          # scarf
-        d.rectangle([76, 45, 80, 52], fill=BOOK_RED)
-        d.line([(66, 47), (58, 40)], fill=MARBLE, width=2)    # stick arms
-        d.line([(82, 47), (90, 40)], fill=MARBLE, width=2)
-
-
-def _note(d, x, y):
-    """Little music note floating up."""
-    d.ellipse([x, y + 3, x + 2, y + 5], fill=BODY_DARK)
-    d.rectangle([x + 2, y, x + 2, y + 3], fill=BODY_DARK)
-    d.rectangle([x + 3, y, x + 3, y + 1], fill=BODY_DARK)
-
-
-def draw_cat_piano(hands, cresc=False, var=0):
-    """Seated at the keyboard: both paws on the keys (they visibly press),
-    swaying and humming along, notes floating up. hands: 'l' | 'c' | 'r'
-    shifts the paws across the keys; cresc = the big finale."""
-    gazes = {"l": "left", "c": "center", "r": "right"}
-    hands = "c" if hands == "cresc" else hands
-    im = draw_cat({
-        "head_dy": 1, "gaze": gazes[hands], "mouth": True,
-        "sway": 2.0 if hands == "l" else -2.0,
-        "happy": cresc or hands == "c",
-    })
-    d = ImageDraw.Draw(im)
-
-    # Upright piano: red felt strip over the key bed.
-    d.rectangle([27, 51, 69, 68], fill=MARBLE)
-    d.rectangle([29, 52, 67, 54], fill=BOOK_RED)
-
-    offset = {"l": -6, "c": 0, "r": 6}[hands]
-    paw_xs = [40 + offset, 52 + offset]
-
-    # White keys, pressing 1px under whichever paw is on them.
-    for i in range(9):
-        kx = 30 + i * 4
-        pressed = any(px - 3 <= kx <= px + 2 for px in paw_xs)
-        ky = 58 if pressed else 57
-        d.rectangle([kx, ky, kx + 3, 66], fill=PAGE)
-        if pressed:
-            d.rectangle([kx, ky, kx + 3, ky + 1], fill=(198, 188, 164, 255))
-    # Black keys (skip the E-F / B-C gaps).
-    for i in range(8):
-        if i not in (2, 6):
-            d.rectangle([33 + i * 4, 56, 34 + i * 4, 61], fill=MARBLE)
-
-    # Playing paws on the keys, outlined so they read against the ivory.
-    for px in paw_xs:
-        d.rounded_rectangle([px - 4, 56, px + 4, 64], radius=3, fill=MARBLE)
-        d.rounded_rectangle([px - 3, 57, px + 3, 63], radius=2, fill=CREAM)
-
-    # Notes floating up from the keys, cycling with var.
-    if cresc:
-        for nx, ny in [(64, 34), (68, 26), (62, 20)]:
-            _note(d, nx, ny + (var * 3))
-    elif hands == "l":
-        _note(d, 64, 38 + (var * 3))
-    elif hands == "r":
-        _note(d, 68, 32 + (var * 3))
-    else:
-        _note(d, 64, 36 + (var * 3))
-        _note(d, 70, 28 + (var * 3))
-    return im
-
-
-YOLK = (240, 204, 80, 255)
-CERAMIC = (226, 222, 210, 255)
-
-
-def _chef_hat(d):
-    """White toque: puffy crown sitting over the ears."""
-    d.rounded_rectangle([37, 19, 59, 25], radius=2, fill=PAGE)
-    d.ellipse([35, 4, 61, 22], fill=PAGE)
-    d.ellipse([38, 0, 52, 12], fill=PAGE)
-    d.ellipse([46, 1, 60, 11], fill=PAGE)
-
-
-def _mixing_bowl(d, batter=True):
-    d.rounded_rectangle([34, 62, 62, 77], radius=5, fill=CERAMIC)
-    d.rectangle([36, 63, 60, 65], fill=SNOW_SHADE)
-    if batter:
-        d.rectangle([38, 63, 58, 64], fill=BUN)
-
-
-def _cake(d, cherry=True):
-    """Layer cake with frosting stripes on a plate, cherry on top."""
-    d.ellipse([34, 71, 62, 77], fill=CERAMIC)
-    d.rounded_rectangle([39, 60, 57, 71], radius=3, fill=BUN)
-    d.rectangle([39, 64, 57, 66], fill=PAGE)
-    d.rounded_rectangle([41, 55, 55, 61], radius=3, fill=BUN)
-    d.ellipse([41, 52, 55, 58], fill=PAGE)
-    if cherry:
-        d.ellipse([46, 50, 49, 53], fill=NOSE)
-        d.rectangle([48, 47, 49, 49], fill=MARBLE)
-
-
-def draw_cat_baking(stage, var=0):
-    """Bake a cake: toque on, crack the egg, stir the bowl, sneak a spoon
-    lick, POOF — the cake appears, cherry goes on, sparkles. stage:
-    crack | stir | lick | cake | decorate | celebrate."""
-    poses = {
-        "crack": {"gaze": "down", "mouth": True},
-        "stir": {"gaze": "down", "mouth": True, "sway": 2.0 if var else -2.0},
-        "lick": {"happy": True, "gaze": "center"},
-        "cake": {"both_paws": True, "gaze": "down", "mouth": True},
-        "decorate": {"gaze": "down", "paw_side": "l", "paw_raise": 1,
-                     "mouth": True, "head_dy": 0},
-        "celebrate": {"both_paws": True, "happy": True, "sway": 2.5},
-    }
-    im = draw_cat(poses[stage])
-    d = ImageDraw.Draw(im)
-    _chef_hat(d)
-
-    if stage == "crack":
-        _mixing_bowl(d)
-        if var:
-            d.rectangle([43, 52, 45, 55], fill=PAGE)
-            d.rectangle([49, 52, 51, 55], fill=PAGE)
-            d.ellipse([46, 58, 49, 61], fill=YOLK)  # yolk drops in
-        else:
-            d.ellipse([45, 50, 49, 55], fill=PAGE)  # whole egg
-    elif stage == "stir":
-        _mixing_bowl(d)
-        sx, sy = [(44, 64), (48, 66), (52, 64)][var % 3]
-        d.line([(57, 52), (sx, sy - 3)], fill=MARBLE, width=2)
-        d.ellipse([sx - 2, sy - 2, sx + 2, sy], fill=PAGE)
-        if var == 1:
-            d.rectangle([40, 57, 41, 58], fill=SNOW_SHADE)  # flour poof
-    elif stage == "lick":
-        _mixing_bowl(d)
-        d.line([(50, 58), (46, 46)], fill=MARBLE, width=2)
-        d.ellipse([43, 43, 47, 47], fill=PAGE)
-        d.rectangle([44, 42, 47, 44], fill=NOSE)  # tongue on the spoon
-    elif stage == "decorate":
-        _cake(d, cherry=False)
-        d.line([(57, 52), (48, 50)], fill=BODY, width=4)
-        d.rounded_rectangle([45, 47, 51, 52], radius=2, fill=CREAM)
-        if var:
-            d.ellipse([46, 50, 49, 53], fill=NOSE)
-    else:  # cake / celebrate
-        _cake(d)
-        if stage == "celebrate":
-            for x, y in [(30, 44), (66, 42), (28, 58)]:
-                d.rectangle([x, y, x + 1, y + 3], fill=CREAM)
-                d.rectangle([x - 1, y + 1, x + 2, y + 2], fill=CREAM)
-    return im
-
-
-FLAME_ORANGE = (226, 120, 40, 255)
-FLAME_RED = (208, 68, 40, 255)
-
-
-def draw_flames(d, size, var, bx=85, by=66):
-    """Flickering fire at the cat's right; size 3 (blaze) .. 1 (ember),
-    0 = out (nothing). var flips the flicker lean."""
-    flick = 1 if var else -1
-
-    def flame(cx, cy, r, h):
-        d.polygon([(cx - r, cy + r), (cx + flick, cy - h), (cx + r, cy + r)],
-                  fill=FLAME_RED)
-        d.ellipse([cx - r, cy - r // 2, cx + r, cy + r], fill=FLAME_ORANGE)
-        d.rectangle([cx - 1, cy, cx + 1, cy + 1], fill=YOLK)
-
-    if size >= 3:
-        flame(76, 66, 3, 6)
-        flame(92, 66, 3, 6)
-    if size >= 2:
-        flame(85, 63, 4, 12)
-    elif size == 1:
-        flame(85, 66, 2, 5)
-
-
-def draw_smoke(d, bx=85):
-    """Gray puffs curling up from an extinguished fire."""
-    by = 66
-    for dx, dy, r, c in [(-2, -12, 3, (120, 116, 110, 255)),
-                         (2, -20, 4, (146, 142, 136, 255)),
-                         (-1, -29, 5, (170, 166, 160, 255))]:
-        d.ellipse([bx + dx - r, by + dy - r, bx + dx + r, by + dy + r], fill=c)
-
-
-def draw_cat_firefighter(state):
-    """Brave kitty: red helmet with a front badge, dark coat with reflective
-    yellow bands. state: 'spray' (braced on the hose) | 'ease' (relaxed,
-    proud) | 'shock' (the fire came back?!)."""
-    poses = {
-        "spray": {"gaze": "right", "mouth": True},
-        "ease": {"happy": True, "gaze": "right"},
-        "shock": {"shock": True, "gaze": "right", "squash": 1},
-    }
-    im = draw_cat(poses[state])
-    d = ImageDraw.Draw(im)
-    # Coat with reflective bands.
-    d.rounded_rectangle([29, 45, 67, 79], radius=8, fill=MARBLE)
-    d.rectangle([31, 51, 65, 53], fill=YOLK)
-    d.rectangle([31, 61, 65, 63], fill=YOLK)
-    # Red helmet: wide brim, dome, front badge.
-    d.ellipse([33, 13, 63, 22], fill=BOOK_RED)
-    d.rounded_rectangle([38, 6, 58, 18], radius=4, fill=BOOK_RED)
-    d.rectangle([46, 15, 50, 19], fill=CREAM)
-    # Paw tips back over the coat hem.
-    d.rounded_rectangle([35, 72, 43, 78], radius=3, fill=CREAM)
-    d.rounded_rectangle([53, 72, 61, 78], radius=3, fill=CREAM)
-    return im
-
-
-def draw_cat_noodles(state, var=0):
-    """Ramen night: slurps noodles from a steaming red bowl with chopsticks,
-    bowl empties, pure happiness. state: 'slurp1' (long strand) |
-    'slurp2' (short strand) | 'slurp3' (final slurp) | 'done'."""
-    poses = {
-        "slurp1": {"gaze": "down", "mouth": True, "sway": 1.5},
-        "slurp2": {"gaze": "down", "mouth": True, "sway": -1.5},
-        "slurp3": {"gaze": "down", "mouth": True, "squash": 1},
-        "done": {"both_paws": True, "happy": True, "sway": 2.5},
-    }
-    im = draw_cat(poses[state])
-    d = ImageDraw.Draw(im)
-
-    # Ramen bowl: red with a cream band, broth + noodle hump inside.
-    d.rounded_rectangle([34, 60, 62, 77], radius=5, fill=BOOK_RED)
-    d.rectangle([36, 61, 60, 63], fill=CREAM)
-    if state != "done":
-        d.rectangle([38, 60, 58, 62], fill=BUN)
-
-    # Steam wisps rising.
-    for sx, sy in [(40, 50), (52, 46), (46, 42)]:
-        yy = sy - var * 3
-        d.rectangle([sx + var, yy, sx + var, yy + 3], fill=SNOW)
-
-    if state == "done":
-        d.rectangle([44, 70, 45, 70], fill=PAGE)
-        d.rectangle([50, 71, 50, 71], fill=PAGE)
-        return im
-
-    # Noodle strand from the bowl up to the mouth, slurping shorter.
-    wig = 1 if var else -1
-    strand = {
-        "slurp1": [(47, 60), (48 + wig, 56), (46, 52), (47 + wig, 48), (46, 44)],
-        "slurp2": [(47, 60), (48 + wig, 55), (46, 50), (46, 45)],
-        "slurp3": [(47, 60), (47 + wig, 53), (46, 47)],
-    }[state]
-    for px, py in strand:
-        d.rectangle([px, py, px + 1, py + 1], fill=BUN)
-
-    # Chopsticks in the right paw, angled to the bowl.
-    d.line([(58, 50), (50, 62)], fill=MARBLE, width=1)
-    d.line([(61, 51), (53, 63)], fill=MARBLE, width=1)
-    d.rounded_rectangle([56, 46, 62, 52], radius=2, fill=CREAM)
-    return im
-
-
-def draw_cat_gaming(state, var=0):
-    """Gamer mode: hunched over the controller, mashing (jitter + whisker
-    rattle), locked-in shock eyes on the clutch, then the WIN — arms up,
-    confetti. state: 'mash' | 'intense' | 'win'."""
-    poses = {
-        "mash": {"gaze": "center", "mouth": var == 0},
-        "intense": {"shock": True, "squash": 1},
-        "win": {"both_paws": True, "happy": True, "sway": 2.5, "tail_up": True},
-    }
-    im = draw_cat(poses[state])
-    if state == "mash":
-        arr = np_roll(im, var * 2 - 1)
-        im = arr
-    d = ImageDraw.Draw(im)
-    if state == "win":
-        for x, y, c in [(30, 20, NOSE), (64, 16, SWEAT), (26, 40, YOLK)]:
-            d.rectangle([x, y, x + 1, y + 3], fill=c)
-            d.rectangle([x - 1, y + 1, x + 2, y + 2], fill=c)
-        return im
-    # controller: body, d-pad, buttons, gripping paws
-    d.rounded_rectangle([41, 58, 57, 66], radius=3, fill=MARBLE)
-    d.rectangle([44, 61, 45, 62], fill=CREAM)
-    d.rectangle([43, 62, 46, 63], fill=CREAM)
-    d.ellipse([52, 60, 55, 63], fill=NOSE)
-    d.rounded_rectangle([39, 58, 45, 64], radius=2, fill=CREAM)
-    d.rounded_rectangle([53, 58, 59, 64], radius=2, fill=CREAM)
-    return im
-
-
-def np_roll(im, dx):
-    """Shift a whole image horizontally (jitter/shake helper)."""
-    import numpy as np
-    arr = np.array(im)
-    out = np.zeros_like(arr)
-    if dx >= 0:
-        out[:, dx:] = arr[:, :arr.shape[1] - dx]
-    else:
-        out[:, :arr.shape[1] + dx] = arr[:, -dx:]
-    return Image.fromarray(out)
-
-
-def draw_cat_campfire(state, var=0):
-    """Night under the stars: campfire crackling, toasting a marshmallow on
-    a stick — golden, charred, eaten. state: 'toast_a' | 'toast_b' |
-    'toast_c' (golden) | 'charred' | 'eaten'."""
-    poses = {
-        "toast_a": {"gaze": "right", "mouth": True, "sway": 1.5},
-        "toast_b": {"gaze": "right", "mouth": True, "sway": -1.5},
-        "toast_c": {"gaze": "right", "happy": True},
-        "charred": {"gaze": "right", "shock": var == 1},
-        "eaten": {"happy": True, "sway": 2.5, "mouth": True},
-    }
-    im = draw_cat(poses[state])
-    d = ImageDraw.Draw(im)
-
-    # Starry night.
-    for sx, sy in [(10, 6), (20, 14), (66, 8), (88, 18), (60, 4), (14, 30),
-                   (90, 30), (30, 4)]:
-        d.rectangle([sx, sy, sx, sy], fill=CREAM)
-
-    # Campfire at the right: crossed logs + flickering flames.
-    d.rectangle([72, 70, 90, 74], fill=MARBLE)
-    d.rectangle([76, 68, 86, 76], fill=MARBLE)
-    draw_flames(d, 2, var, bx=79, by=68)
-
-    # Stick with the marshmallow over the flames.
-    d.line([(56, 54), (72, 50)], fill=MARBLE, width=2)
-    if state != "eaten":
-        toast_color = {"toast_a": PAGE, "toast_b": PAGE,
-                       "toast_c": BUN, "charred": (110, 92, 74, 255)}[state]
-        mx, my = (70, 46) if var == 0 else (71, 47)
-        d.rounded_rectangle([mx, my, mx + 4, my + 4], radius=1, fill=toast_color)
-        if state == "toast_c":
-            d.rectangle([mx + 2, my + 2, mx + 3, my + 3], fill=PATTY)
-        if state == "charred" and var:
-            d.rectangle([mx - 1, my - 1, mx, my], fill=BODY_DARK)
-    else:
-        d.rectangle([70, 47, 71, 48], fill=PAGE)  # last crumb
-    return im
-
-
-def draw_cat_dance(state, var=0):
-    """Disco night: ball overhead throwing light beams, big side-to-side
-    moves with an arm pump, notes in the air. state: 'left' | 'right' |
-    'pump' (both arms) | 'spin' (quick swap)."""
-    poses = {
-        "left": {"paw_side": "l", "paw_raise": 0, "happy": True, "mouth": True,
-                 "sway": 2.5, "gaze": "left"},
-        "right": {"paw_side": "r", "paw_raise": 0, "happy": True, "mouth": True,
-                  "sway": -2.5, "gaze": "right"},
-        "pump": {"both_paws": True, "happy": True, "mouth": True, "tail_up": True,
-                 "head_dy": -1},
-        "spin": {"both_paws": True, "happy": True, "sway": 0.0, "ear_r_dx": 2},
-    }
-    im = draw_cat(poses[state])
-    if state == "left":
-        im = np_roll(im, -3)
-    elif state == "right":
-        im = np_roll(im, 3)
-    d = ImageDraw.Draw(im)
-
-    # Disco ball + beams.
-    d.rectangle([47, 0, 49, 4], fill=MARBLE)
-    d.ellipse([40, 3, 58, 21], fill=MARBLE)
-    for fx in (45, 50, 55):
-        d.rectangle([fx, 5, fx, 19], fill=(96, 102, 118, 255))
-    for fy in (9, 14):
-        d.rectangle([42, fy, 56, fy], fill=(96, 102, 118, 255))
-    if var:
-        d.rectangle([28, 22, 29, 34], fill=CREAM)
-        d.rectangle([68, 20, 69, 30], fill=CREAM)
-    else:
-        d.rectangle([36, 24, 37, 34], fill=CREAM)
-        d.rectangle([60, 22, 61, 32], fill=CREAM)
-    # notes bouncing at the sides
-    _note(d, 24, 40 + (var * 4))
-    _note(d, 70, 36 - var * 4)
-    return im
-
-
-def draw_cat_weightlifting(state, var=0):
-    """The clean and press, headband on. state: 'ready' (eyeing the bar) |
-    'grip' (crouch, paws on the bar) | 'lift' (bar at the chest) |
-    'press' (bar overhead) | 'hold' (trembling, sweat) | 'drop' (thud,
-    dust, pride). var jitters the hold and swaps the drop bounce."""
-    poses = {
-        "ready": {"gaze": "down", "headband": True},
-        "grip": {"gaze": "down", "squash": 1, "mouth": True, "headband": True},
-        "lift": {"gaze": "center", "mouth": True, "head_dy": 1,
-                 "headband": True, "sway": 0.0},
-        "press": {"both_paws": True, "head_dy": -1, "mouth": True, "gaze": "up",
-                  "headband": True},
-        "hold": {"both_paws": True, "head_dy": -1, "happy": True, "gaze": "up",
-                 "headband": True, "whisker_dy": -1 if var else 1},
-        "drop": {"happy": True, "squash": 1, "headband": True, "sway": 2.5},
-    }
-    im = draw_cat(poses[state])
-    d = ImageDraw.Draw(im)
-
-    # Barbell heights through the lift.
-    bar_y = {"ready": 72, "grip": 71, "lift": 56,
-             "press": 14, "hold": 15 + (var % 2), "drop": 70 + (1 - var)}[state]
-
-    # Bar + plates.
-    d.rectangle([33, bar_y, 63, bar_y + 2], fill=MARBLE)
-    for px in (29, 60):
-        d.rounded_rectangle([px, bar_y - 5, px + 5, bar_y + 7], radius=1,
-                            fill=MARBLE)
-        d.rectangle([px + 2, bar_y - 3, px + 2, bar_y + 5],
-                    fill=(96, 102, 118, 255))
-
-    if state == "grip":
-        for ax in (44, 52):
-            d.line([(ax, 56), (ax, bar_y)], fill=BODY, width=4)
-        d.rounded_rectangle([42, bar_y - 2, 54, bar_y + 4], radius=2, fill=CREAM)
-    elif state == "lift":
-        for ax, bx in ((44, 36), (52, 60)):
-            d.line([(ax, 52), (bx, bar_y + 1)], fill=BODY, width=4)
-        d.rounded_rectangle([34, bar_y - 2, 42, bar_y + 3], radius=2, fill=CREAM)
-        d.rounded_rectangle([56, bar_y - 2, 64, bar_y + 3], radius=2, fill=CREAM)
-    elif state in ("press", "hold"):
-        # straight arms up to the bar, paws locked on
-        for ax, bx in ((31, 35), (63, 59)):
-            d.line([(ax, 28), (bx, bar_y + 2)], fill=BODY, width=4)
-        d.rounded_rectangle([33, bar_y - 1, 41, bar_y + 4], radius=2, fill=CREAM)
-        d.rounded_rectangle([55, bar_y - 1, 63, bar_y + 4], radius=2, fill=CREAM)
-        d.rectangle([45, 43, 46, 45], fill=NOSE)  # effort tongue
-        d.rectangle([33, 30, 34, 32], fill=SWEAT)
-
-    if state == "drop" and var:
-        for dx in (28, 45, 62):  # impact dust
-            d.ellipse([dx, 76, dx + 6, 81], fill=SNOW_SHADE)
-    if state == "press" or (state == "hold" and var):
-        d.rectangle([36, 26, 37, 28], fill=SWEAT)
-    return im
-
-
-def draw_cat_suit(state, var=0):
-    """Fresh: dark suit, white shirt, red tie. state: 'tie' (adjusts the
-    knot, both paws) | 'shades' (sunglasses on, strutting) | 'strut_l'/
-    'strut_r' (confident sway) | 'point' (finger guns + sparkles)."""
-    poses = {
-        "tie": {"both_paws": True, "gaze": "down", "sway": 0.0},
-        "shades": {"gaze": "right", "mouth": True, "sway": 2.0},
-        "strut_l": {"happy": True, "sway": 2.5, "gaze": "left", "paw_dx": 1},
-        "strut_r": {"happy": True, "sway": -2.5, "gaze": "right", "paw_dx": -1},
-        "point": {"gaze": "right", "mouth": True},
-    }
-    im = draw_cat(poses[state])
-    d = ImageDraw.Draw(im)
-
-    # Suit jacket with a white shirt V and dark lapels.
-    d.rounded_rectangle([29, 45, 67, 79], radius=8, fill=MARBLE)
-    d.polygon([(40, 45), (48, 45), (48, 58), (40, 52)], fill=PAGE)
-    d.polygon([(56, 45), (48, 45), (48, 58), (56, 52)], fill=PAGE)
-    lapel = (58, 52, 46, 255)
-    d.polygon([(37, 45), (42, 45), (48, 57), (43, 51)], fill=lapel)
-    d.polygon([(59, 45), (54, 45), (48, 57), (53, 51)], fill=lapel)
-    # The tie: knot + blade.
-    d.rectangle([46, 46, 50, 50], fill=BOOK_RED)
-    d.polygon([(45, 50), (51, 50), (52, 65), (44, 65)], fill=BOOK_RED)
-    d.rectangle([46, 52, 50, 53], fill=(160, 60, 56, 255))
-
-    if state == "tie":
-        d.rounded_rectangle([42, 47, 50, 53], radius=2, fill=CREAM)
-        d.rounded_rectangle([46, 47, 54, 53], radius=2, fill=CREAM)
-    # Sunglasses once the fit is complete.
-    if state in ("shades", "strut_l", "strut_r", "point"):
-        d.rounded_rectangle([37, 28, 58, 34], radius=2, fill=MARBLE)
-        d.rectangle([40, 30, 41, 31], fill=CREAM)
-        d.rectangle([52, 30, 53, 31], fill=CREAM)
-    if state == "point":
-        d.line([(57, 50), (68, 42)], fill=BODY, width=4)
-        d.rounded_rectangle([65, 38, 72, 44], radius=2, fill=CREAM)
-        for x, y in [(72, 33), (75, 38)]:
-            d.rectangle([x, y, x + 1, y + 3], fill=CREAM)
-            d.rectangle([x - 1, y + 1, x + 2, y + 2], fill=CREAM)
-    return im
-
-
-BASEBALL = (247, 240, 218, 255)  # white leather, red stitches
-
-
-def draw_baseball(d, x, y):
-    d.ellipse([x - 2, y - 2, x + 2, y + 2], fill=BASEBALL)
-    d.rectangle([x - 2, y, x - 1, y], fill=NOSE)
-    d.rectangle([x + 1, y, x + 2, y], fill=NOSE)
-
-
-def draw_volleyball(d, x, y):
-    d.ellipse([x - 4, y - 4, x + 4, y + 4], fill=PAGE)
-    d.rectangle([x - 3, y - 1, x + 3, y], fill=SWEAT)
-    d.rectangle([x - 1, y - 3, x, y + 3], fill=SWEAT)
-    d.rectangle([x + 2, y - 2, x + 3, y - 1], fill=NOSE)
-
-
-def draw_batter(phase, var=0):
-    """Side-view batter facing left, red headband on. phase: 'ready' (bat
-    cocked behind) | 'swing1' (bat sweeps down through the zone) |
-    'contact' (bat level, ball meeting it) | 'follow' (wrapped around,
-    watching it fly)."""
-    im = new_canvas()
-    d = ImageDraw.Draw(im)
-    d.ellipse([44, 68, 76, 74], fill=GROUND_SHADOW)
-
-    def leg(x0, x1):
-        d.rectangle([x0, 58, x1, 70], fill=BODY)
-        d.rounded_rectangle([x0 - 1, 68, x1 + 1, 72], radius=2, fill=CREAM)
-
-    leg(52, 58)
-    leg(64, 70)
-    # Body upright, leaning toward the plate (left).
-    d.rounded_rectangle([46, 34, 72, 60], radius=8, fill=BODY)
-    d.rectangle([50, 36, 68, 37], fill=BODY_LIGHT)
-    d.rectangle([50, 56, 68, 58], fill=BODY_DARK)
-    draw_blob(d, 62, 46, [(0, 0, 2.6), (3, 3, 2.0)], MARBLE)
-    # Tail curling up behind.
-    for i, (x, y) in enumerate(_bezier((70, 56), (76, 50), (78, 40), (74, 32), n=12)):
-        t = i / 12
-        r = 2.4 if t < 0.7 else 2.0
-        ring = (0.4 <= t <= 0.6) or t > 0.85
-        d.ellipse([x - r, y - r, x + r, y + r], fill=MARBLE if ring else BODY)
-    # Head facing left.
-    d.rounded_rectangle([40, 20, 62, 40], radius=8, fill=BODY)
-    d.ellipse([38, 30, 62, 44], fill=BODY)
-    for cx, dy in [(46, -1), (55, 0)]:
-        d.polygon([(cx - 4, 24 + dy), (cx, 15 + dy), (cx + 4, 24 + dy)], fill=BODY)
-        d.ellipse([cx - 2, 16 + dy, cx + 2, 20 + dy], fill=MARBLE)
-    d.rectangle([42, 25, 60, 28], fill=BOOK_RED)  # headband
-    d.rectangle([40, 32, 44, 35], fill=EYE)       # eye, locked on the pitch
-    d.rectangle([40, 37, 46, 39], fill=CREAM)     # muzzle
-    d.rectangle([40, 36, 41, 37], fill=NOSE)
-    for wx in (36, 38):
-        d.rectangle([wx, 34, wx, 34], fill=WHISKER)
-    draw_blob(d, 56, 26, HEAD_MARBLE, MARBLE)
-
-    # Arms + bat through the swing.
-    BAT = BUN
-    if phase == "ready":
-        d.line([(56, 42), (66, 34)], fill=BODY, width=4)
-        d.line([(66, 34), (76, 20)], fill=BAT, width=3)
-        d.rectangle([75, 18, 77, 20], fill=MARBLE)
-        d.rounded_rectangle([54, 40, 60, 45], radius=2, fill=CREAM)
-    elif phase == "swing1":
-        d.line([(52, 46), (46, 54)], fill=BODY, width=4)
-        d.line([(46, 54), (42, 68)], fill=BAT, width=3)
-        d.rounded_rectangle([44, 50, 50, 55], radius=2, fill=CREAM)
-    elif phase == "contact":
-        d.line([(52, 44), (40, 46)], fill=BODY, width=4)
-        d.line([(40, 46), (24, 44)], fill=BAT, width=3)
-        d.rounded_rectangle([42, 43, 48, 48], radius=2, fill=CREAM)
-    else:  # follow
-        d.line([(52, 42), (42, 36)], fill=BODY, width=4)
-        d.line([(42, 36), (26, 24)], fill=BAT, width=3)
-        d.rounded_rectangle([40, 33, 46, 38], radius=2, fill=CREAM)
+        return draw_cat({"sway": 2.0, "gaze": "center"})
     return im
 
 
