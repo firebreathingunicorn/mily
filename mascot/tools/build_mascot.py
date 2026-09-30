@@ -87,6 +87,7 @@ def main():
         "weightlifting": actions.frames_weightlifting,
         "suit": actions.frames_suit,
         "camera": actions.frames_camera,
+        "halloween": actions.frames_halloween,
         "baseball": actions.frames_baseball,
         "volleyball": actions.frames_volleyball,
         "firefighter": actions.frames_firefighter,

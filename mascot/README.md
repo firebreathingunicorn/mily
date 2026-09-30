@@ -54,6 +54,7 @@ Thirty-five actions, five outputs each:
 | `weightlifting` | seamless | the clean and press in a headband: grip, clean to the chest, press overhead, trembling sweat hold, drop with a dust thud |
 | `suit` | seamless | FRESH: adjusts the red tie, sunglasses slide on, confident strut, finger guns with sparkles |
 | `camera` | seamless | Best Take in one loop: raises the camera to the eye, viewfinder squint, FLASH, reviews the shot on the back screen, celebrates the keep |
+| `halloween` | seamless | trick-or-treat night: witch hat, flickering jack-o'-lantern, a bat swoop to duck under, candy haul |
 | `baseball` | one-shot | at the plate: the pitch comes in, one level swing — CRACK — ball rockets off with speed lines while the batter watches it fly |
 | `volleyball` | seamless | bump off the forearms, watch it rise, jump and SPIKE it down — serve comes back in |
 | `grooming` | seamless | paw lick with tongue darts, cheek wipe, perks up |

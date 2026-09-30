@@ -218,7 +218,7 @@ def frames_basketball():
             d.line([(57, 52), (63, 61)], fill=BODY[:3] + (255,), width=4)
             d.rounded_rectangle([60, 58, 66, 63], radius=2, fill=CREAM)
         sq = tag == "down"
-        draw_basketball(d, bx, by, rx=4 if sq else 3, ry=2 if sq else 3)
+        draw_basketball(d, bx, by, rx=6 if sq else 5, ry=4 if sq else 5)
         if tag == "score":
             # swish sparkle at the rim
             d.rectangle([88, 13, 89, 16], fill=CREAM)
@@ -226,9 +226,9 @@ def frames_basketball():
         return im
 
     seq = [
-        ("up", 63, 45), ("down", 63, 60), ("up", 63, 45), ("down", 63, 60),
-        ("up", 63, 45), ("down", 63, 60),
-        ("shoot", 67, 34), ("shoot", 72, 27),
+        ("up", 63, 46), ("down", 63, 68), ("up", 63, 46), ("down", 63, 68),
+        ("up", 63, 46), ("down", 63, 68),
+        ("shoot", 67, 32), ("shoot", 72, 25),
         ("fly", 78, 21), ("fly", 81, 18),
         ("score", 81, 19), ("score", 81, 24), ("score", 81, 19), ("score", 81, 24),
     ]
@@ -780,11 +780,11 @@ def frames_volleyball():
         return im
 
     seq = [
-        ("reset", 48, 8, 0),
-        ("bump", 48, 60, 0), ("bump", 48, 58, 1),
-        ("risen", 48, 42, 0), ("risen", 54, 30, 1), ("risen", 58, 20, 0),
-        ("spike", 62, 28, 0), ("spike", 68, 38, 1),
-        ("bump", 48, 60, 0),
+        ("reset", 48, 6, 0),
+        ("bump", 48, 56, 0), ("bump", 48, 54, 1),
+        ("risen", 48, 38, 0), ("risen", 50, 24, 1), ("risen", 52, 14, 0),
+        ("spike", 60, 22, 0), ("spike", 66, 34, 1),
+        ("bump", 48, 56, 0),
     ]
     return [scene(*s) for s in seq]
 
@@ -800,6 +800,52 @@ def frames_camera():
            ("review", 0), ("review", 1), ("review", 0),
            ("celebrate", 0), ("celebrate", 1), ("celebrate", 0)]
     return [draw_cat_camera(s, v) for s, v in seq]
+
+
+def frames_halloween():
+    """Trick-or-treat night: full moon, stars, the witch-hat cat watches the
+    jack-o'-lantern flicker, a bat swoops over (DUCK), then it works
+    through the candy haul. Seamless loop; returns Images."""
+    from PIL import ImageDraw
+
+    from mascot_sprite import (CREAM, MARBLE, SNOW_SHADE, draw_cat_halloween,
+                               new_canvas)
+
+    def star(d, x, y):
+        d.rectangle([x, y, x, y], fill=CREAM)
+
+    def scene(state, var, idx):
+        im = draw_cat_halloween(state, var)
+        d = ImageDraw.Draw(im)
+        # full moon + stars, behind everything
+        d.ellipse([6, 2, 24, 20], fill=CREAM)
+        d.rectangle([12, 8, 13, 9], fill=SNOW_SHADE)
+        d.rectangle([16, 13, 17, 14], fill=SNOW_SHADE)
+        for sx, sy in [(30, 6), (40, 14), (78, 6), (90, 26), (4, 30)]:
+            star(d, sx, sy)
+        # the bat swoops across during the duck
+        if state == "duck":
+            bat_x = (88, 58, 24)[var % 3]
+            im2 = draw_cat_halloween("watch", var, bat_x=bat_x)
+            d2 = ImageDraw.Draw(im2)
+            # re-draw just the bat onto the duck frame
+            flap = -2 if var else 2
+            bx = bat_x
+            d2.ellipse([bx, 9, bx + 6, 14], fill=MARBLE)
+            d2.polygon([(bx, 11), (bx - 8, 11 + flap), (bx - 1, 15)], fill=MARBLE)
+            d2.polygon([(bx + 6, 11), (bx + 13, 11 + flap), (bx + 6, 15)], fill=MARBLE)
+        return im
+
+    seq = [
+        ("watch", 0), ("watch", 1), ("watch", 0),
+        ("curious", 0), ("curious", 1), ("curious", 0),
+        ("duck", 0), ("duck", 1), ("duck", 0), ("duck", 1),
+        ("candy", 0), ("candy", 1),
+        ("bite", 0), ("bite", 1),
+        ("done", 0), ("done", 1), ("done", 0),
+        ("celebrate", 0), ("celebrate", 1), ("celebrate", 0),
+    ]
+    return [scene(s, v, i) for i, (s, v) in enumerate(seq)]
 
 
 def frames_grooming():
