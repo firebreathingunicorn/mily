@@ -1662,6 +1662,12 @@ def draw_cat_camera(state, var=0):
     im = draw_cat(poses[state])
     d = ImageDraw.Draw(im)
 
+    # Smile wherever the mouth is visible (the raised camera covers it).
+    if state in ("down", "review", "celebrate"):
+        hd = 1 if state != "celebrate" else 0
+        for px, py in [(44, 43), (45, 44), (46, 44), (47, 44), (48, 43)]:
+            d.rectangle([px, py + hd, px, py + hd], fill=EYE)
+
     if state in ("aim", "squint", "flash"):
         # Camera raised: covers the muzzle, eyes peek over the top rim.
         cx = 49
